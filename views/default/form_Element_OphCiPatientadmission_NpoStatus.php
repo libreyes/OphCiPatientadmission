@@ -27,56 +27,97 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 	<div class="element-fields">
-	<?php echo $form->datePicker($element, 'time_last_ate', array('maxDate' => 'today'), array('style'=>'width: 110px;'), array('label' => 3, 'field' => 2))?>
-	<?php echo $form->datePicker($element, 'time_last_drank', array('maxDate' => 'today'), array('style'=>'width: 110px;'), array('label' => 3, 'field' => 2))?>
-	<div class="row field-row">
-		<div class="large-3 column"><label></label></div>
-		<div class="large-3 column end">
-			<?php echo $form->checkBox($element, 'procedure_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+		<div class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphCiPatientadmission_NpoStatus_time_last_ate_0">
+					<?php echo $element->getAttributeLabel('time_last_ate')?>:
+				</label>
+			</div>
+			<div class="large-4 column end">
+				<?php echo $form->datePicker($element, 'time_last_ate', array('maxDate' => 'today'), array('style'=>'width: 110px; display: inline-block;','nowrapper' => true))?>
+				<?php echo $form->textField($element, 'time_last_ate_time', array('nowrapper' => true, 'style' => 'width: 50px; display: inline-block;'))?>
+			</div>
 		</div>
-	</div>
-	<?php echo $form->dropDownList($element, 'procedure_id', CHtml::listData(Procedure::model()->findAll(array('order'=> 'term asc')),'id','term'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
-	<div class="row field-row">
-		<div class="large-3 column"><label></label></div>
-		<div class="large-3 column end">
-			<?php echo $form->checkBox($element, 'site_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+		<div class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphCiPatientadmission_NpoStatus_time_last_drank_0">
+					<?php echo $element->getAttributeLabel('time_last_drank')?>:
+				</label>
+			</div>
+			<div class="large-4 column end">
+				<?php echo $form->datePicker($element, 'time_last_drank', array('maxDate' => 'today'), array('style'=>'width: 110px; display: inline-block;','nowrapper' => true))?>
+				<?php echo $form->textField($element, 'time_last_drank_time', array('nowrapper' => true, 'style' => 'width: 50px; display: inline-block;'))?>
+			</div>
 		</div>
-	</div>
-	<?php echo $form->dropDownList($element, 'site_id', CHtml::listData(Site::model()->findAll(array('order'=> 'name asc')),'id','name'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
-	<div class="row field-row">
-		<div class="large-3 column"><label></label></div>
-		<div class="large-3 column end">
-			<?php echo $form->checkBox($element, 'signed_and_witnessed', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+		<div class="row field-row">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-3 column end">
+				<?php echo $form->checkBox($element, 'procedure_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+			</div>
 		</div>
-	</div>
-	<div class="row field-row">
-		<div class="large-3 column"><label></label></div>
-		<div class="large-3 column end">
-			<?php echo $form->checkBox($element, 'type_of_surgery', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+		<div id="div_Element_OphCiPatientadmission_NpoStatus_procedure_id" class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphCiPatientadmission_NpoStatus_procedure_id">
+					<?php echo $element->getAttributeLabel('procedure_id')?>:
+				</label>
+			</div>
+			<div class="large-3 column end">
+				<?php foreach ($this->bookingProcedures as $procedure) {?>
+					<div><?php echo $procedure->term?></div>
+					<input type="hidden" name="<?php echo get_class($element)?>[procedure_id]" value="<?php echo $procedure->id?>" />
+				<?php }?>
+			</div>
 		</div>
-	</div>
-	<div class="row field-row">
-		<div class="large-3 column"><label></label></div>
-		<div class="large-3 column end">
-			<?php echo $form->checkBox($element, 'site_marked_by_x', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+		<div class="row field-row">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-3 column end">
+				<?php echo $form->checkBox($element, 'site_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+			</div>
 		</div>
-	</div>
-	<?php echo $form->dropDownList($element, 'site_marked_by_id', CHtml::listData(User::model()->findAll(array('order'=> 'username asc')),'id','username'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
-	<div class="row field-row">
-		<div class="large-3 column"><label></label></div>
-		<div class="large-3 column end">
-			<?php echo $form->checkBox($element, 'iol_measurements_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+		<div id="div_Element_OphCiPatientadmission_NpoStatus_site_id" class="row field-row">
+			<div class="large-3 column">
+				<label for="Element_OphCiPatientadmission_NpoStatus_site_id">
+					<?php echo $element->getAttributeLabel('site_id')?>:
+				</label>
+			</div>
+			<div class="large-3 column end">
+				<?php echo $this->bookingSite->name?>
+			</div>
 		</div>
-	</div>
-	<div class="row field-row">
-		<div class="large-3 column"><label></label></div>
-		<div class="large-3 column end">
-			<?php echo $form->checkBox($element, 'iol_selected', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+		<div class="row field-row">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-3 column end">
+				<?php echo $form->checkBox($element, 'signed_and_witnessed', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+			</div>
 		</div>
-	</div>
-	<?php echo $form->textArea($element, 'comments', array('rows' => 6, 'cols' => 80), false, array(), array('label' => 3, 'field' => 4))?>
-	<?php echo $form->datePicker($element, 'signature_timestamp', array('maxDate' => 'today'), array('style'=>'width: 110px;'), array('label' => 3, 'field' => 2))?>
-	<?php echo $form->dropDownList($element, 'signature_user_id', CHtml::listData(User::model()->findAll(array('order'=> 'username asc')),'id','username'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
-	<?php echo $form->dropDownList($element, 'signature_role_id', CHtml::listData(User::model()->findAll(array('order'=> 'username asc')),'id','username'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
+		<div class="row field-row">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-3 column end">
+				<?php echo $form->checkBox($element, 'type_of_surgery', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-3 column end">
+				<?php echo $form->checkBox($element, 'site_marked_by_x', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+			</div>
+		</div>
+		<?php echo $form->dropDownList($element, 'site_marked_by_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
+		<div class="row field-row">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-3 column end">
+				<?php echo $form->checkBox($element, 'iol_measurements_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+			</div>
+		</div>
+		<div class="row field-row">
+			<div class="large-3 column"><label></label></div>
+			<div class="large-3 column end">
+				<?php echo $form->checkBox($element, 'iol_selected', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+			</div>
+		</div>
+		<?php echo $form->textArea($element, 'comments', array('rows' => 6, 'cols' => 80), false, array(), array('label' => 3, 'field' => 4))?>
+		<?php echo $form->datePicker($element, 'signature_timestamp', array('maxDate' => 'today'), array('style'=>'width: 110px;'), array('label' => 3, 'field' => 2))?>
+		<?php echo $form->dropDownList($element, 'signature_user_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
+		<?php echo $form->dropDownList($element, 'signature_role_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
 	</div>
 </section>

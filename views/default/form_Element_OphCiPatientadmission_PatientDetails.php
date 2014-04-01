@@ -28,10 +28,10 @@
 	</header>
 	<div class="element-fields">
 		<?php echo $form->radioButtons($element, 'translator_present_id', 'ophcipatientadmission_patientdetails_translator_present', null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
-		<?php echo $form->textField($element, 'name_of_translator', array('maxlength' => '255', 'hide' => !empty($POST) ? @$_POST['Element_OphCiPatientadmission_PatientDetails']['translator_present_id'] != 1 : $element->translator_present_id != 1), array(), array('label' => 3, 'field' => 3))?>
+		<?php echo $form->textField($element, 'name_of_translator', array('maxlength' => '255', 'hide' => $element->translator_present_id != 1), array(), array('label' => 3, 'field' => 3))?>
 		<div class="row field-row">
 			<div class="large-3 column"><label></label></div>
-			<div class="large-3 column end">
+			<div class="large-4 column end">
 				<?php echo $form->checkBox($element, 'patient_id_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 		<?php echo $form->radioButtons($element, 'caregiver_present_id', 'ophcipatientadmission_patientdetails_caregiver_present', null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
-		<?php echo $form->textField($element, 'caregiver_name', array('maxlength' => '255', 'hide' => !empty($_POST) ? @$_POST['Element_OphCiPatientadmission_PatientDetails']['caregiver_present_id'] != 1 : $element->caregiver_present_id != 1), array(), array('label' => 3, 'field' => 3))?>
-		<?php echo $form->dropDownList($element, 'caregiver_relationship_id', CHtml::listData(OphCiPatientadmission_PatientDetails_CaregiverRelationship::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),!empty($_POST) ? @$_POST['Element_OphCiPatientadmission_PatientDetails']['caregiver_present_id'] != 1 : $element->caregiver_present_id != 1,array('label' => 3, 'field' => 3))?>
+		<?php echo $form->textField($element, 'caregiver_name', array('maxlength' => '255', 'hide' => $element->caregiver_present_id != 1), array(), array('label' => 3, 'field' => 3))?>
+		<?php echo $form->dropDownList($element, 'caregiver_relationship_id', CHtml::listData(OphCiPatientadmission_PatientDetails_CaregiverRelationship::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),$element->caregiver_present_id != 1,array('label' => 3, 'field' => 3))?>
 	</div>
 </section>

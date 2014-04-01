@@ -56,6 +56,9 @@
 
 class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 {
+	public $time_last_ate_time;
+	public $time_last_drank_time;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -81,7 +84,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, time_last_ate, time_last_drank, procedure_verified, procedure_id, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'safe'),
+			array('event_id, time_last_ate, time_last_drank, procedure_verified, procedure_id, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, time_last_ate_time, time_last_drank_time', 'safe'),
 			array('time_last_ate, time_last_drank, procedure_verified, procedure_id, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -121,7 +124,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'time_last_ate' => 'Time last ate',
 			'time_last_drank' => 'Time last drank',
 			'procedure_verified' => 'Procedure verified',
-			'procedure_id' => 'Procedure',
+			'procedure_id' => 'Procedure(s)',
 			'site_verified' => 'Site verified',
 			'site_id' => 'Site',
 			'signed_and_witnessed' => 'Signed and witnessed',
@@ -134,6 +137,8 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'signature_timestamp' => 'Signature timestamp',
 			'signature_user_id' => 'Signature user',
 			'signature_role_id' => 'Signature role',
+			'time_last_ate_time' => 'Time last ate',
+			'time_last_drank_time' => 'Time last drank',
 		);
 	}
 
@@ -172,20 +177,27 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		));
 	}
 
-	protected function beforeSave()
+	public function setDefaultOptions()
 	{
-		return parent::beforeSave();
+		$this->time_last_ate_time = date('H:i');
+		$this->time_last_drank_time = date('H:i');
 	}
 
-	protected function afterSave()
+	protected function afterValidate()
 	{
+		if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->time_last_ate_time,$m) || $m[1] > 23 || $m[2] > 59) {
+			$this->addError('time_last_ate_time','Invalid time format for '.$this->getAttributeLabel('time_last_ate_time'));
+		} else {
+			$this->time_last_ate = date('Y-m-d',strtotime($this->time_last_ate)).' '.str_pad($m[1],2,"0",STR_PAD_LEFT).":".$m[2].":00";
+		}
 
-		return parent::afterSave();
-	}
+		if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->time_last_drank_time,$m) || $m[1] > 23 || $m[2] > 59) {
+			$this->addError('time_last_drank_time','Invalid time format for '.$this->getAttributeLabel('time_last_drank_time'));
+		} else {
+			$this->time_last_drank = date('Y-m-d',strtotime($this->time_last_drank)).' '.str_pad($m[1],2,"0",STR_PAD_LEFT).":".$m[2].":00";
+		}
 
-	protected function beforeValidate()
-	{
-		return parent::beforeValidate();
+		return parent::afterValidate();
 	}
 }
 ?>
