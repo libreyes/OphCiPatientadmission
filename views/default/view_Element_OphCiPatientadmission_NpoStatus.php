@@ -23,69 +23,75 @@
 		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
 	</header>
 	<div class="element-data">
-				<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_ate'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->NHSDate('time_last_ate'))?></div></div>
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_ate'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->NHSDate('time_last_ate'))?> <?php echo substr($element->time_last_ate,11,5)?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_drank'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->NHSDate('time_last_drank'))?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_drank'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->NHSDate('time_last_drank'))?> <?php echo substr($element->time_last_drank,11,5)?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedure_verified'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->procedure_verified ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedure_verified'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->procedure_verified ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedure_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->procedure ? $element->procedure->term : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedure_id'))?></div></div>
+			<div class="large-9 column end">
+				<div class="data-value">
+					<?php foreach ($element->procedures as $procedure) {?>
+						<?php echo $procedure->term?><br/>
+					<?php }?>
+				</div>
+			</div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_verified'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->site_verified ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_verified'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_verified ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->site ? $element->site->name : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->site ? $element->site->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signed_and_witnessed'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->signed_and_witnessed ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signed_and_witnessed'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->signed_and_witnessed ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('type_of_surgery'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->type_of_surgery ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('type_of_surgery'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->type_of_surgery ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_x'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->site_marked_by_x ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_x'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_marked_by_x ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->site_marked_by ? $element->site_marked_by->username : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_marked_by ? $element->site_marked_by->username : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_measurements_verified'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->iol_measurements_verified ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_measurements_verified'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_measurements_verified ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_selected'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->iol_selected ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_selected'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_selected ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->comments)?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->comments)?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signature_timestamp'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo CHtml::encode($element->NHSDate('signature_timestamp'))?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signature_timestamp'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->NHSDate('signature_timestamp'))?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signature_user_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->signature_user ? $element->signature_user->username : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signature_user_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->signature_user ? $element->signature_user->username : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-2 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signature_role_id'))?></div></div>
-			<div class="large-10 column end"><div class="data-value"><?php echo $element->signature_role ? $element->signature_role->username : 'None'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signature_role_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->signature_role ? $element->signature_role->username : 'None'?></div></div>
 		</div>
 	</div>
 </section>

@@ -26,7 +26,6 @@
  * @property string $time_last_ate
  * @property string $time_last_drank
  * @property integer $procedure_verified
- * @property integer $procedure_id
  * @property integer $site_verified
  * @property integer $site_id
  * @property integer $signed_and_witnessed
@@ -84,11 +83,11 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, time_last_ate, time_last_drank, procedure_verified, procedure_id, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, time_last_ate_time, time_last_drank_time', 'safe'),
-			array('time_last_ate, time_last_drank, procedure_verified, procedure_id, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'required'),
+			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, time_last_ate_time, time_last_drank_time, booking_event_id', 'safe'),
+			array('time_last_ate, time_last_drank, procedure_verified, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, procedure_id, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'safe', 'on' => 'search'),
+			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -105,11 +104,11 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'procedure' => array(self::BELONGS_TO, 'Procedure', 'procedure_id'),
 			'site' => array(self::BELONGS_TO, 'Site', 'site_id'),
 			'site_marked_by' => array(self::BELONGS_TO, 'User', 'site_marked_by_id'),
 			'signature_user' => array(self::BELONGS_TO, 'User', 'signature_user_id'),
 			'signature_role' => array(self::BELONGS_TO, 'User', 'signature_role_id'),
+			'procedures' => array(self::MANY_MANY, 'Procedure', 'ophcipatientadmission_npostatus_procedure_assignment(element_id, procedure_id)', 'order' => 'procedures.id asc'),
 		);
 	}
 
@@ -124,7 +123,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'time_last_ate' => 'Time last ate',
 			'time_last_drank' => 'Time last drank',
 			'procedure_verified' => 'Procedure verified',
-			'procedure_id' => 'Procedure(s)',
 			'site_verified' => 'Site verified',
 			'site_id' => 'Site',
 			'signed_and_witnessed' => 'Signed and witnessed',
@@ -139,6 +137,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'signature_role_id' => 'Signature role',
 			'time_last_ate_time' => 'Time last ate',
 			'time_last_drank_time' => 'Time last drank',
+			'procedure_id' => 'Procedures',
 		);
 	}
 
@@ -158,7 +157,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		$criteria->compare('time_last_ate', $this->time_last_ate);
 		$criteria->compare('time_last_drank', $this->time_last_drank);
 		$criteria->compare('procedure_verified', $this->procedure_verified);
-		$criteria->compare('procedure_id', $this->procedure_id);
 		$criteria->compare('site_verified', $this->site_verified);
 		$criteria->compare('site_id', $this->site_id);
 		$criteria->compare('signed_and_witnessed', $this->signed_and_witnessed);
@@ -183,6 +181,20 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		$this->time_last_drank_time = date('H:i');
 	}
 
+	public function beforeSave()
+	{
+		$this->time_last_ate .= ' '.$this->time_last_ate_time;
+		$this->time_last_drank .= ' '.$this->time_last_drank_time;
+
+		return parent::beforeSave();
+	}
+
+	public function afterFind()
+	{
+		$this->time_last_ate_time = substr($this->time_last_ate,11,5);
+		$this->time_last_drank_time = substr($this->time_last_drank,11,5);
+	}
+
 	protected function afterValidate()
 	{
 		if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->time_last_ate_time,$m) || $m[1] > 23 || $m[2] > 59) {
@@ -198,6 +210,28 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		}
 
 		return parent::afterValidate();
+	}
+
+	public function updateProcedures($procedure_ids)
+	{
+		foreach ($procedure_ids as $procedure_id) {
+			if (!$assignment = OphCiPatientadmission_NpoStatus_Procedure_Assignment::model()->find('element_id=? and procedure_id=?',array($this->id,$procedure_id))) {
+				$assignment = new OphCiPatientadmission_NpoStatus_Procedure_Assignment;
+				$assignment->element_id = $this->id;
+				$assignment->procedure_id = $procedure_id;
+
+				if (!$assignment->save()) {
+					throw new Exception("Unable to save assignment: ".print_r($assignment->getErrors(),true));
+				}
+			}
+		}
+
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('element_id = :element_id');
+		$criteria->params[':element_id'] = $this->id;
+		$criteria->addNotInCondition('procedure_id',$procedure_ids);
+
+		OphCiPatientadmission_NpoStatus_Procedure_Assignment::model()->deleteAll($criteria);
 	}
 }
 ?>

@@ -67,9 +67,9 @@ class DefaultController extends BaseEventTypeController
 		}
 	}
 
-	public function getBookingProcedures()
+	protected function setElementDefaultOptions_Element_OphCiPatientadmission_NpoStatus($element, $action)
 	{
-		if ($this->action->id == 'create') {
+		if ($action == 'create') {
 			if (!$api = Yii::app()->moduleAPI->get('OphTrOperationbooking')) {
 				throw new Exception("Unable to activate operation booking api");
 			}
@@ -78,18 +78,45 @@ class DefaultController extends BaseEventTypeController
 				throw new Exception("Procedures not found for operation booking event: ".$_GET['booking_event_id']);
 			}
 
-			return $procedures;
+			$element->procedures = $procedures;
+
+			$site = $api->findSiteForBookingEvent(Event::model()->findByPk($_GET['booking_event_id']));
+
+			$element->site_id = $site->id;
+			$element->site = $site;
 		}
 	}
 
-	public function getBookingSite()
+	/**
+	 * associate the answers and risks from the data with the Element_OphCiPatientadmission_NpoStatus element for
+	 * validation
+	 *
+	 * @param Element_OphCiPatientadmission_NpoStatus $element
+	 * @param array $data
+	 * @param $index
+	 */
+	protected function setComplexAttributes_Element_OphCiPatientadmission_NpoStatus($element, $data, $index)
 	{
-		if ($this->action->id == 'create') {
-			if (!$api = Yii::app()->moduleAPI->get('OphTrOperationbooking')) {
-				throw new Exception("Unable to activate operation booking api");
-			}
+		$procedures = array();
 
-			return $api->findSiteForBookingEvent(Event::model()->findByPk($_GET['booking_event_id']));
+		foreach ($_POST['Element_OphCiPatientadmission_NpoStatus']['procedure_id'] as $procedure_id) {
+			$procedures[] = Procedure::model()->findByPk($procedure_id);
 		}
+
+		$element->procedures = $procedures;
+		$element->site_id = $_POST['Element_OphCiPatientadmission_NpoStatus']['site_id'];
+		$element->site = Site::model()->findByPk($element->site_id);
+	}
+
+	/**
+	 * Save procedures
+	 *
+	 * @param $element
+	 * @param $data
+	 * @param $index
+	 */
+	protected function saveComplexAttributes_Element_OphCiPatientadmission_NpoStatus($element, $data, $index)
+	{
+		$element->updateProcedures($data['Element_OphCiPatientadmission_NpoStatus']['procedure_id']);
 	}
 }

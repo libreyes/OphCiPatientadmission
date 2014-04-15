@@ -1,4 +1,4 @@
-<?php
+/** OphCiPatientadmission module styles */
 /**
  * OpenEyes
  *
@@ -16,22 +16,15 @@
  * @copyright Copyright (c) 2011-2013, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
-?>
-
-<?php
-if ($this->canPrint()) {
-	$this->event_actions[] = EventAction::button('Print', 'print',null,array('class'=>'small button'));
+/* line 17, ../sass/components/_event.scss */
+.event {
+  border-color: #aaaaaa;
 }
-$this->beginContent('//patient/event_container');
-?>
-
-<?php if ($this->event->delete_pending) {?>
-	<div class="alert-box alert with-icon">
-		This event is pending deletion and has been locked.
-	</div>
-<?php }?>
-
-<?php $this->renderDefaultElements($this->action->id)?>
-<?php $this->renderOptionalElements($this->action->id)?>
-
-<?php $this->endContent()?>
+/* line 19, ../sass/components/_event.scss */
+.event .event-content {
+  background-image: url('../img/watermark.png?1396276223');
+}
+/* line 22, ../sass/components/_event.scss */
+.event .event-title {
+  background-image: url('../img/medium.png?1396276223');
+}

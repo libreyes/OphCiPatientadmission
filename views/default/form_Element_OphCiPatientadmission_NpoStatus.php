@@ -27,6 +27,7 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 	<div class="element-fields">
+		<input type="hidden" name="Element_OphCiPatientadmission_NpoStatus[booking_event_id]" value="<?php echo $element->id ? $element->booking_event_id : @$_GET['booking_event_id']?>" />
 		<div class="row field-row">
 			<div class="large-3 column">
 				<label for="Element_OphCiPatientadmission_NpoStatus_time_last_ate_0">
@@ -62,9 +63,9 @@
 				</label>
 			</div>
 			<div class="large-3 column end">
-				<?php foreach ($this->bookingProcedures as $procedure) {?>
+				<?php foreach ($element->procedures as $procedure) {?>
 					<div><?php echo $procedure->term?></div>
-					<input type="hidden" name="<?php echo get_class($element)?>[procedure_id]" value="<?php echo $procedure->id?>" />
+					<input type="hidden" name="<?php echo get_class($element)?>[procedure_id][]" value="<?php echo $procedure->id?>" />
 				<?php }?>
 			</div>
 		</div>
@@ -81,7 +82,8 @@
 				</label>
 			</div>
 			<div class="large-3 column end">
-				<?php echo $this->bookingSite->name?>
+				<?php echo $element->site->name?>
+				<input type="hidden" name="Element_OphCiPatientadmission_NpoStatus[site_id]" value="<?php echo $element->site_id?>" />
 			</div>
 		</div>
 		<div class="row field-row">
