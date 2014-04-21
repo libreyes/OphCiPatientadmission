@@ -38,35 +38,6 @@ $(document).ready(function() {
 			}
 		}
 	});
-
-	$('#Element_OphCiPatientadmission_PatientDetails_translator_present_id_1').click(function(e) {
-		$('#div_Element_OphCiPatientadmission_PatientDetails_name_of_translator').show();
-		$('#Element_OphCiPatientadmission_PatientDetails_name_of_translator').select().focus();
-	});
-
-	$('#Element_OphCiPatientadmission_PatientDetails_translator_present_id_2').click(function(e) {
-		$('#div_Element_OphCiPatientadmission_PatientDetails_name_of_translator').hide();
-	});
-
-	$('#Element_OphCiPatientadmission_PatientDetails_translator_present_id_3').click(function(e) {
-		$('#div_Element_OphCiPatientadmission_PatientDetails_name_of_translator').hide();
-	});
-
-	$('#Element_OphCiPatientadmission_PatientDetails_caregiver_present_id_1').click(function(e) {
-		$('#div_Element_OphCiPatientadmission_PatientDetails_caregiver_name').show();
-		$('#div_Element_OphCiPatientadmission_PatientDetails_caregiver_relationship_id').show();
-		$('#Element_OphCiPatientadmission_PatientDetails_caregiver_name').select().focus();
-	});
-
-	$('#Element_OphCiPatientadmission_PatientDetails_caregiver_present_id_2').click(function(e) {
-		$('#div_Element_OphCiPatientadmission_PatientDetails_caregiver_name').hide();
-		$('#div_Element_OphCiPatientadmission_PatientDetails_caregiver_relationship_id').hide();
-	});
-
-	$('#Element_OphCiPatientadmission_PatientDetails_caregiver_present_id_3').click(function(e) {
-		$('#div_Element_OphCiPatientadmission_PatientDetails_caregiver_name').hide();
-		$('#div_Element_OphCiPatientadmission_PatientDetails_caregiver_relationship_id').hide();
-	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }

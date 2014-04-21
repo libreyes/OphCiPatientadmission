@@ -17,7 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-
 <section class="element <?php echo $element->elementType->class_name?>"
 	data-element-type-id="<?php echo $element->elementType->id?>"
 	data-element-type-class="<?php echo $element->elementType->class_name?>"
@@ -27,7 +26,7 @@
 		<h3 class="element-title"><?php echo $element->elementType->name; ?></h3>
 	</header>
 	<div class="element-fields">
-		<?php echo $form->radioButtons($element, 'translator_present_id', 'ophcipatientadmission_patientdetails_translator_present', null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
+		<?php echo $form->radioButtons($element, 'translator_present_id', CHtml::listData(OphCiPatientadmission_PatientDetails_TranslatorPresent::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array('class' => 'linked-fields', 'data-linked-fields' => 'name_of_translator', 'data-linked-value' => 'Yes'), array('label' => 3, 'field' => 3))?>
 		<?php echo $form->textField($element, 'name_of_translator', array('maxlength' => '255', 'hide' => $element->translator_present_id != 1), array(), array('label' => 3, 'field' => 3))?>
 		<div class="row field-row">
 			<div class="large-3 column"><label></label></div>
@@ -47,7 +46,7 @@
 				<?php echo $form->checkBox($element, 'medication_history_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 			</div>
 		</div>
-		<?php echo $form->radioButtons($element, 'caregiver_present_id', 'ophcipatientadmission_patientdetails_caregiver_present', null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
+		<?php echo $form->radioButtons($element, 'caregiver_present_id', CHtml::listData(OphCiPatientadmission_PatientDetails_CaregiverPresent::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array('class' => 'linked-fields', 'data-linked-fields' => 'caregiver_name,caregiver_relationship_id', 'data-linked-value' => 'Yes'), array('label' => 3, 'field' => 3))?>
 		<?php echo $form->textField($element, 'caregiver_name', array('maxlength' => '255', 'hide' => $element->caregiver_present_id != 1), array(), array('label' => 3, 'field' => 3))?>
 		<?php echo $form->dropDownList($element, 'caregiver_relationship_id', CHtml::listData(OphCiPatientadmission_PatientDetails_CaregiverRelationship::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),$element->caregiver_present_id != 1,array('label' => 3, 'field' => 3))?>
 	</div>
