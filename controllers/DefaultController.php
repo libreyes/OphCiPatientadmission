@@ -99,12 +99,12 @@ class DefaultController extends BaseEventTypeController
 	{
 		$procedures = array();
 
-		foreach ($_POST['Element_OphCiPatientadmission_NpoStatus']['procedure_id'] as $procedure_id) {
+		foreach ($data['Element_OphCiPatientadmission_NpoStatus']['procedure_id'] as $procedure_id) {
 			$procedures[] = Procedure::model()->findByPk($procedure_id);
 		}
 
 		$element->procedures = $procedures;
-		$element->site_id = $_POST['Element_OphCiPatientadmission_NpoStatus']['site_id'];
+		$element->site_id = $data['Element_OphCiPatientadmission_NpoStatus']['site_id'];
 		$element->site = Site::model()->findByPk($element->site_id);
 	}
 
