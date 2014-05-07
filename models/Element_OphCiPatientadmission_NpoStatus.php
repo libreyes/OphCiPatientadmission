@@ -35,9 +35,6 @@
  * @property integer $iol_measurements_verified
  * @property integer $iol_selected
  * @property string $comments
- * @property string $signature_timestamp
- * @property integer $signature_user_id
- * @property integer $signature_role_id
  *
  * The followings are the available model relations:
  *
@@ -49,8 +46,6 @@
  * @property Procedure $procedure
  * @property Site $site
  * @property User $site_marked_by
- * @property User $signature_user
- * @property User $signature_role
  */
 
 class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
@@ -83,11 +78,11 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed', 'safe'),
-			array('time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'required'),
+			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed', 'safe'),
+			array('time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'safe', 'on' => 'search'),
+			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -106,8 +101,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'eye' => array(self::BELONGS_TO, 'Eye', 'eye_id'),
 			'site_marked_by' => array(self::BELONGS_TO, 'User', 'site_marked_by_id'),
-			'signature_user' => array(self::BELONGS_TO, 'User', 'signature_user_id'),
-			'signature_role' => array(self::BELONGS_TO, 'User', 'signature_role_id'),
 			'procedures' => array(self::MANY_MANY, 'Procedure', 'ophcipatientadmission_npostatus_procedure_assignment(element_id, procedure_id)', 'order' => 'procedures.id asc'),
 		);
 	}
@@ -132,9 +125,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'iol_measurements_verified' => 'IOL measurements verified',
 			'iol_selected' => 'IOL selected',
 			'comments' => 'Comments',
-			'signature_timestamp' => 'Signature timestamp',
-			'signature_user_id' => 'Signature user',
-			'signature_role_id' => 'Signature role',
 			'time_last_ate_time' => 'Time last ate',
 			'time_last_drank_time' => 'Time last drank',
 			'procedure_id' => 'Procedures',
@@ -167,9 +157,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		$criteria->compare('iol_measurements_verified', $this->iol_measurements_verified);
 		$criteria->compare('iol_selected', $this->iol_selected);
 		$criteria->compare('comments', $this->comments);
-		$criteria->compare('signature_timestamp', $this->signature_timestamp);
-		$criteria->compare('signature_user_id', $this->signature_user_id);
-		$criteria->compare('signature_role_id', $this->signature_role_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,

@@ -99,17 +99,5 @@
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->comments)?></div></div>
 		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signature_timestamp'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->NHSDate('signature_timestamp'))?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signature_user_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->signature_user ? $element->signature_user->username : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signature_role_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->signature_role ? $element->signature_role->username : 'None'?></div></div>
-		</div>
 	</div>
 </section>

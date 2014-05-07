@@ -116,8 +116,5 @@
 			</div>
 		</div>
 		<?php echo $form->textArea($element, 'comments', array('rows' => 6, 'cols' => 80), false, array(), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->datePicker($element, 'signature_timestamp', array('maxDate' => 'today'), array('style'=>'width: 110px;','null' => true), array('label' => 3, 'field' => 2))?>
-		<?php echo $form->dropDownList($element, 'signature_user_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
-		<?php echo $form->dropDownList($element, 'signature_role_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
 	</div>
 </section>
