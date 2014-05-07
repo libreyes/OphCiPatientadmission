@@ -127,7 +127,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'eye_id' => 'Eye',
 			'signed_and_witnessed' => 'Signed and witnessed',
 			'type_of_surgery' => 'Type of surgery',
-			'site_marked_by_x' => 'Site marked by X',
+			'site_marked_by_x' => 'Site marked by X by operating surgeon or staff ophthalmologist',
 			'site_marked_by_id' => 'Site marked by',
 			'iol_measurements_verified' => 'IOL measurements verified',
 			'iol_selected' => 'IOL selected',

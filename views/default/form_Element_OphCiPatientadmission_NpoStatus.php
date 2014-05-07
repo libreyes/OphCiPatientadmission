@@ -98,7 +98,7 @@
 		</div>
 		<div class="row field-row">
 			<div class="large-3 column"><label></label></div>
-			<div class="large-3 column end">
+			<div class="large-9 column end">
 				<?php echo $form->checkBox($element, 'site_marked_by_x', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 			</div>
 		</div>
