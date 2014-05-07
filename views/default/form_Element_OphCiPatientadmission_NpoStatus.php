@@ -35,7 +35,7 @@
 				</label>
 			</div>
 			<div class="large-4 column end">
-				<?php echo $form->datePicker($element, 'time_last_ate', array('maxDate' => 'today'), array('style'=>'width: 110px; display: inline-block;','nowrapper' => true))?>
+				<?php echo $form->datePicker($element, 'time_last_ate', array('maxDate' => 'today'), array('style'=>'width: 110px; display: inline-block;','nowrapper' => true,'null' => true))?>
 				<?php echo $form->textField($element, 'time_last_ate_time', array('nowrapper' => true, 'style' => 'width: 50px; display: inline-block;'))?>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 				</label>
 			</div>
 			<div class="large-4 column end">
-				<?php echo $form->datePicker($element, 'time_last_drank', array('maxDate' => 'today'), array('style'=>'width: 110px; display: inline-block;','nowrapper' => true))?>
+				<?php echo $form->datePicker($element, 'time_last_drank', array('maxDate' => 'today'), array('style'=>'width: 110px; display: inline-block;','nowrapper' => true,'null' => true))?>
 				<?php echo $form->textField($element, 'time_last_drank_time', array('nowrapper' => true, 'style' => 'width: 50px; display: inline-block;'))?>
 			</div>
 		</div>
@@ -116,7 +116,7 @@
 			</div>
 		</div>
 		<?php echo $form->textArea($element, 'comments', array('rows' => 6, 'cols' => 80), false, array(), array('label' => 3, 'field' => 4))?>
-		<?php echo $form->datePicker($element, 'signature_timestamp', array('maxDate' => 'today'), array('style'=>'width: 110px;'), array('label' => 3, 'field' => 2))?>
+		<?php echo $form->datePicker($element, 'signature_timestamp', array('maxDate' => 'today'), array('style'=>'width: 110px;','null' => true), array('label' => 3, 'field' => 2))?>
 		<?php echo $form->dropDownList($element, 'signature_user_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
 		<?php echo $form->dropDownList($element, 'signature_role_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
 	</div>

@@ -178,8 +178,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 
 	public function setDefaultOptions()
 	{
-		$this->time_last_ate_time = date('H:i');
-		$this->time_last_drank_time = date('H:i');
 	}
 
 	public function beforeSave()
