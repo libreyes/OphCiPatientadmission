@@ -95,6 +95,7 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 			'translator_present' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_TranslatorPresent', 'translator_present_id'),
 			'caregiver_present' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverPresent', 'caregiver_present_id'),
 			'caregiver_relationship' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverRelationship', 'caregiver_relationship_id'),
+			'identifiers' => array(self::HAS_MANY, 'OphCiPatientadmission_PatientDetails_Identifier_Assignment', 'element_id'),
 		);
 	}
 
@@ -114,6 +115,7 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 			'caregiver_present_id' => 'Caregiver present',
 			'caregiver_name' => 'Caregiver name',
 			'caregiver_relationship_id' => 'Caregiver relationship',
+			'identifiers' => 'Two identifiers',
 		);
 	}
 
@@ -164,6 +166,12 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 		} else {
 			$this->caregiver_name = '';
 			$this->caregiver_relationship_id = null;
+		}
+
+		if ($this->patient_id_verified) {
+			if (count($this->identifiers) != 2) {
+				$this->addError('identifiers','Please select exactly 2 identifiers');
+			}
 		}
 
 		return parent::afterValidate();

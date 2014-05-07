@@ -31,9 +31,10 @@
 		<div class="row field-row">
 			<div class="large-3 column"><label></label></div>
 			<div class="large-4 column end">
-				<?php echo $form->checkBox($element, 'patient_id_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+				<?php echo $form->checkBox($element, 'patient_id_verified', array('nowrapper' => true, 'class' => 'linked-fields', 'data-linked-fields' => 'MultiSelect_identifiers', 'data-linked-values' => '1'), array('label' => 3, 'field' => 3))?>
 			</div>
 		</div>
+		<?php echo $form->multiSelectList($element, 'MultiSelect_identifiers', 'identifiers', 'identifier_id', CHtml::listData(OphCiPatientadmission_PatientDetails_Identifier::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Two identifiers'), !$element->patient_id_verified, false, null, false, false, array('label' => 3, 'field' => 4))?>
 		<div class="row field-row">
 			<div class="large-3 column"><label></label></div>
 			<div class="large-3 column end">

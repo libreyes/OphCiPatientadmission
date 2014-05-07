@@ -119,4 +119,25 @@ class DefaultController extends BaseEventTypeController
 	{
 		$element->updateProcedures($data['Element_OphCiPatientadmission_NpoStatus']['procedure_id']);
 	}
+
+	protected function setComplexAttributes_Element_OphCiPatientadmission_PatientDetails($element, $data, $index)
+	{
+		$identifiers = array();
+
+		if (!empty($data['MultiSelect_identifiers'])) {
+			foreach ($data['MultiSelect_identifiers'] as $identifier_id) {
+				$assignment = new OphCiPatientadmission_PatientDetails_Identifier_Assignment;
+				$assignment->identifier_id = $identifier_id;
+
+				$identifiers[] = $assignment;
+			}
+		}
+
+		$element->identifiers = $identifiers;
+	}
+
+	protected function saveComplexAttributes_Element_OphCiPatientadmission_PatientDetails($element, $data, $index)
+	{
+		$element->updateMultiSelectData('OphCiPatientadmission_PatientDetails_Identifier_Assignment',empty($data['MultiSelect_identifiers']) ? array() : $data['MultiSelect_identifiers'],'identifier_id');
+	}
 }
