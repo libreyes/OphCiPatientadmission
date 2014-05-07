@@ -83,7 +83,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, time_last_ate_time, time_last_drank_time, booking_event_id', 'safe'),
+			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed', 'safe'),
 			array('time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -138,6 +138,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'time_last_ate_time' => 'Time last ate',
 			'time_last_drank_time' => 'Time last drank',
 			'procedure_id' => 'Procedures',
+			'correct_site_confirmed' => 'Correct site confirmed',
 		);
 	}
 

@@ -87,15 +87,13 @@
 			</div>
 		</div>
 		<div class="row field-row">
-			<div class="large-3 column"><label></label></div>
-			<div class="large-3 column end">
-				<?php echo $form->checkBox($element, 'signed_and_witnessed', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+			<div class="large-3 column">
+				<label>Consent:</label>
 			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column"><label></label></div>
-			<div class="large-3 column end">
+			<div class="large-9 column">
+				<?php echo $form->checkBox($element, 'signed_and_witnessed', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 				<?php echo $form->checkBox($element, 'type_of_surgery', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+				<?php echo $form->checkBox($element, 'correct_site_confirmed', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 			</div>
 		</div>
 		<div class="row field-row">

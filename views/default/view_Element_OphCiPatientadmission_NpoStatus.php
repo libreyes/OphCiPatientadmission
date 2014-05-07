@@ -54,12 +54,30 @@
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->eye ? $element->eye->name : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('signed_and_witnessed'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->signed_and_witnessed ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('type_of_surgery'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->type_of_surgery ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column">
+				<div class="data-label">Consent</div>
+			</div>
+			<div class="large-9 column end">
+				<div class="row data-row">
+					<div class="large-4 column">
+						<div class="data-value">
+							<?php if (!$element->signed_and_witnessed && !$element->type_of_surgery && !$element->correct_site_confirmed) {?>
+								None
+							<?php }else{
+								if ($element->signed_and_witnessed) {?>
+										<div><?php echo CHtml::encode($element->getAttributeLabel('signed_and_witnessed'))?></div>
+								<?php }
+								if ($element->type_of_surgery) {?>
+									<div><?php echo CHtml::encode($element->getAttributeLabel('type_of_surgery'))?></div>
+								<?php }
+								if ($element->correct_site_confirmed) {?>
+									<div><?php echo CHtml::encode($element->getAttributeLabel('correct_site_confirmed'))?></div>
+								<?php }
+							}?>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_x'))?></div></div>
