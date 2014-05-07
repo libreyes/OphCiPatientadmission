@@ -75,15 +75,15 @@
 				<?php echo $form->checkBox($element, 'site_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 			</div>
 		</div>
-		<div id="div_Element_OphCiPatientadmission_NpoStatus_site_id" class="row field-row">
+		<div id="div_Element_OphCiPatientadmission_NpoStatus_eye_id" class="row field-row">
 			<div class="large-3 column">
-				<label for="Element_OphCiPatientadmission_NpoStatus_site_id">
-					<?php echo $element->getAttributeLabel('site_id')?>:
+				<label for="Element_OphCiPatientadmission_NpoStatus_eye_id">
+					<?php echo $element->getAttributeLabel('eye_id')?>:
 				</label>
 			</div>
 			<div class="large-3 column end">
-				<?php echo $element->site->name?>
-				<input type="hidden" name="Element_OphCiPatientadmission_NpoStatus[site_id]" value="<?php echo $element->site_id?>" />
+				<?php echo $element->eye->name?>
+				<input type="hidden" name="Element_OphCiPatientadmission_NpoStatus[eye_id]" value="<?php echo $element->eye_id?>" />
 			</div>
 		</div>
 		<div class="row field-row">

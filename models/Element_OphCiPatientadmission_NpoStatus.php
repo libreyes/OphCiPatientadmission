@@ -83,11 +83,11 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, time_last_ate_time, time_last_drank_time, booking_event_id', 'safe'),
-			array('time_last_ate, time_last_drank, procedure_verified, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'required'),
+			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, time_last_ate_time, time_last_drank_time, booking_event_id', 'safe'),
+			array('time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, site_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'safe', 'on' => 'search'),
+			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, signature_timestamp, signature_user_id, signature_role_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -104,7 +104,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'site' => array(self::BELONGS_TO, 'Site', 'site_id'),
+			'eye' => array(self::BELONGS_TO, 'Eye', 'eye_id'),
 			'site_marked_by' => array(self::BELONGS_TO, 'User', 'site_marked_by_id'),
 			'signature_user' => array(self::BELONGS_TO, 'User', 'signature_user_id'),
 			'signature_role' => array(self::BELONGS_TO, 'User', 'signature_role_id'),
@@ -124,7 +124,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'time_last_drank' => 'Time last drank',
 			'procedure_verified' => 'Procedure verified',
 			'site_verified' => 'Site verified',
-			'site_id' => 'Site',
+			'eye_id' => 'Eye',
 			'signed_and_witnessed' => 'Signed and witnessed',
 			'type_of_surgery' => 'Type of surgery',
 			'site_marked_by_x' => 'Site marked by X',
@@ -158,7 +158,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		$criteria->compare('time_last_drank', $this->time_last_drank);
 		$criteria->compare('procedure_verified', $this->procedure_verified);
 		$criteria->compare('site_verified', $this->site_verified);
-		$criteria->compare('site_id', $this->site_id);
+		$criteria->compare('eye_id', $this->eye_id);
 		$criteria->compare('signed_and_witnessed', $this->signed_and_witnessed);
 		$criteria->compare('type_of_surgery', $this->type_of_surgery);
 		$criteria->compare('site_marked_by_x', $this->site_marked_by_x);
