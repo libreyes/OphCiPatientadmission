@@ -23,14 +23,16 @@
 		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
 	</header>
 	<div class="element-data">
-				<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('translator_present_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->translator_present ? $element->translator_present->name : 'None'?></div></div>
-		</div>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('name_of_translator'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->name_of_translator)?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('translator_present_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->translator_present ? $element->translator_present->name : 'Not specified'?></div></div>
 		</div>
+		<?php if ($element->translator_present && $element->translator_present == 'Yes') {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('name_of_translator'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->name_of_translator)?></div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('patient_id_verified'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->patient_id_verified ? 'Yes' : 'No'?></div></div>
@@ -58,15 +60,17 @@
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('caregiver_present_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->caregiver_present ? $element->caregiver_present->name : 'None'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->caregiver_present ? $element->caregiver_present->name : 'Not specified'?></div></div>
 		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('caregiver_name'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->caregiver_name)?></div></div>
-		</div>
+		<?php if ($element->caregiver_present && $element->caregiver_present->name == 'Yes') {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('caregiver_name'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->caregiver_name)?></div></div>
+			</div>
+		<?php }?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('caregiver_relationship_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->caregiver_relationship ? $element->caregiver_relationship->name : 'None'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->caregiver_relationship ? $element->caregiver_relationship->name : 'Not specified'?></div></div>
 		</div>
 	</div>
 </section>

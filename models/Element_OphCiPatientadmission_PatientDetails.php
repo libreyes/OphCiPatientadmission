@@ -72,7 +72,6 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 		// will receive user inputs.
 		return array(
 			array('event_id, translator_present_id, name_of_translator, patient_id_verified, allergies_verified, medication_history_verified, caregiver_present_id, caregiver_name, caregiver_relationship_id', 'safe'),
-			array('translator_present_id, patient_id_verified, allergies_verified, medication_history_verified, caregiver_present_id', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, event_id, translator_present_id, name_of_translator, patient_id_verified, allergies_verified, medication_history_verified, caregiver_present_id, caregiver_name, caregiver_relationship_id, ', 'safe', 'on' => 'search'),

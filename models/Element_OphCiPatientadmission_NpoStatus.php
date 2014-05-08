@@ -79,7 +79,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// will receive user inputs.
 		return array(
 			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed', 'safe'),
-			array('time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments', 'safe', 'on' => 'search'),
@@ -169,8 +168,17 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 
 	public function beforeSave()
 	{
-		$this->time_last_ate .= ' '.$this->time_last_ate_time;
-		$this->time_last_drank .= ' '.$this->time_last_drank_time;
+		if ($this->time_last_ate) {
+			$this->time_last_ate .= ' '.$this->time_last_ate_time;
+		} else {
+			$this->time_last_ate = null;
+		}
+
+		if ($this->time_last_drank) {
+			$this->time_last_drank .= ' '.$this->time_last_drank_time;
+		} else {
+			$this->time_last_drank = null;
+		}
 
 		return parent::beforeSave();
 	}
@@ -183,16 +191,20 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 
 	protected function afterValidate()
 	{
-		if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->time_last_ate_time,$m) || $m[1] > 23 || $m[2] > 59) {
-			$this->addError('time_last_ate_time','Invalid time format for '.$this->getAttributeLabel('time_last_ate_time'));
-		} else {
-			$this->time_last_ate = date('Y-m-d',strtotime($this->time_last_ate)).' '.str_pad($m[1],2,"0",STR_PAD_LEFT).":".$m[2].":00";
+		if (strlen($this->time_last_ate_time) >0) {
+			if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->time_last_ate_time,$m) || $m[1] > 23 || $m[2] > 59) {
+				$this->addError('time_last_ate_time','Invalid time format for '.$this->getAttributeLabel('time_last_ate_time'));
+			} else {
+				$this->time_last_ate = date('Y-m-d',strtotime($this->time_last_ate)).' '.str_pad($m[1],2,"0",STR_PAD_LEFT).":".$m[2].":00";
+			}
 		}
 
-		if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->time_last_drank_time,$m) || $m[1] > 23 || $m[2] > 59) {
-			$this->addError('time_last_drank_time','Invalid time format for '.$this->getAttributeLabel('time_last_drank_time'));
-		} else {
-			$this->time_last_drank = date('Y-m-d',strtotime($this->time_last_drank)).' '.str_pad($m[1],2,"0",STR_PAD_LEFT).":".$m[2].":00";
+		if (strlen($this->time_last_drank_time) >0) {
+			if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->time_last_drank_time,$m) || $m[1] > 23 || $m[2] > 59) {
+				$this->addError('time_last_drank_time','Invalid time format for '.$this->getAttributeLabel('time_last_drank_time'));
+			} else {
+				$this->time_last_drank = date('Y-m-d',strtotime($this->time_last_drank)).' '.str_pad($m[1],2,"0",STR_PAD_LEFT).":".$m[2].":00";
+			}
 		}
 
 		return parent::afterValidate();

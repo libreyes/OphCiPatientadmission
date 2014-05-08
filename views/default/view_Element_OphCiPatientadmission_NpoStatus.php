@@ -25,11 +25,11 @@
 	<div class="element-data">
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_ate'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->NHSDate('time_last_ate'))?> <?php echo substr($element->time_last_ate,11,5)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->time_last_ate ? $element->NHSDate('time_last_ate').' '.substr($element->time_last_ate,11,5) : 'Not recorded'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_drank'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->NHSDate('time_last_drank'))?> <?php echo substr($element->time_last_drank,11,5)?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->time_last_drank ? $element->NHSDate('time_last_drank').' '.substr($element->time_last_drank,11,5) : 'Not recorded'?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedure_verified'))?></div></div>
@@ -95,9 +95,11 @@
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_selected'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_selected ? 'Yes' : 'No'?></div></div>
 		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->comments)?></div></div>
-		</div>
+		<?php if ($element->comments) {?>
+			<div class="row data-row">
+				<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></div></div>
+				<div class="large-9 column end"><div class="data-value"><?php echo CHtml::encode($element->comments)?></div></div>
+			</div>
+		<?php }?>
 	</div>
 </section>
