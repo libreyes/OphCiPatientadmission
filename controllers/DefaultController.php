@@ -78,12 +78,18 @@ class DefaultController extends BaseEventTypeController
 				throw new Exception("Procedures not found for operation booking event: ".$_GET['booking_event_id']);
 			}
 
+			if (!$operation = $api->getOperationForEvent($_GET['booking_event_id'])) {
+				throw new Exception("Operation not found for booking event: ".$_GET['booking_event_id']);
+			}
+
 			$element->procedures = $procedures;
 
 			$eye = $api->getEyeForOperation($_GET['booking_event_id']);
 
 			$element->eye_id = $eye->id;
 			$element->eye = $eye;
+
+			$element->time_last_drank = $operation->booking->session_date;
 		}
 	}
 
