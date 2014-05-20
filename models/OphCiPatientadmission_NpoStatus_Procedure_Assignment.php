@@ -34,7 +34,7 @@
  * @property User $usermodified
  */
 
-class OphCiPatientadmission_NpoStatus_Procedure_Assignment extends BaseActiveRecord
+class OphCiPatientadmission_NpoStatus_Procedure_Assignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
