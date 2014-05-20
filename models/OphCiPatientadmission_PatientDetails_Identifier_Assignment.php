@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "ophcipatientadmission_patientdetails_identifier_assignment".
+ * This is the model class for table "ophcipatientadmission_patientdetails_identassign".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -48,7 +48,7 @@ class OphCiPatientadmission_PatientDetails_Identifier_Assignment extends BaseAct
 	 */
 	public function tableName()
 	{
-		return 'ophcipatientadmission_patientdetails_identifier_assignment';
+		return 'ophcipatientadmission_patientdetails_identassign';
 	}
 
 	/**
