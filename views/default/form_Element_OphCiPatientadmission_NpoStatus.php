@@ -47,16 +47,16 @@
 				<?php echo $form->checkBox($element, 'procedure_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 			</div>
 		</div>
-		<div id="div_Element_OphCiPatientadmission_NpoStatus_procedure_id" class="row field-row">
+		<div id="div_Element_OphCiPatientadmission_NpoStatus_procedures" class="row field-row">
 			<div class="large-3 column">
-				<label for="Element_OphCiPatientadmission_NpoStatus_procedure_id">
-					<?php echo $element->getAttributeLabel('procedure_id')?>:
+				<label for="Element_OphCiPatientadmission_NpoStatus_procedures">
+					<?php echo $element->getAttributeLabel('procedures')?>:
 				</label>
 			</div>
 			<div class="large-3 column end">
 				<?php foreach ($element->procedures as $procedure) {?>
 					<div><?php echo $procedure->term?></div>
-					<input type="hidden" name="<?php echo get_class($element)?>[procedure_id][]" value="<?php echo $procedure->id?>" />
+					<input type="hidden" name="<?php echo get_class($element)?>[procedures][]" value="<?php echo $procedure->id?>" />
 				<?php }?>
 			</div>
 		</div>

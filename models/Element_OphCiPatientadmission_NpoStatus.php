@@ -52,6 +52,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 {
 	public $time_last_ate_time;
 	public $time_last_drank_time;
+	public $auto_update_relations = true;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -78,7 +79,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed', 'safe'),
+			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed, procedures', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments', 'safe', 'on' => 'search'),
@@ -100,7 +101,8 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'eye' => array(self::BELONGS_TO, 'Eye', 'eye_id'),
 			'site_marked_by' => array(self::BELONGS_TO, 'User', 'site_marked_by_id'),
-			'procedures' => array(self::MANY_MANY, 'Procedure', 'ophcipatientadmission_npostatus_procedure_assignment(element_id, procedure_id)', 'order' => 'procedures.id asc'),
+			'procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'through' => 'procedure_assignment'),
+			'procedure_assignment' => array(self::HAS_MANY, 'OphCiPatientadmission_NpoStatus_Procedure_Assignment', 'element_id', 'order' => 'id asc'),
 		);
 	}
 
@@ -126,7 +128,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'comments' => 'Comments',
 			'time_last_ate_time' => 'Time last ate',
 			'time_last_drank_time' => 'Time last drank',
-			'procedure_id' => 'Procedures',
+			'procedures' => 'Procedures',
 			'correct_site_confirmed' => 'Correct site confirmed',
 		);
 	}
@@ -208,28 +210,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		}
 
 		return parent::afterValidate();
-	}
-
-	public function updateProcedures($procedure_ids)
-	{
-		foreach ($procedure_ids as $procedure_id) {
-			if (!$assignment = OphCiPatientadmission_NpoStatus_Procedure_Assignment::model()->find('element_id=? and procedure_id=?',array($this->id,$procedure_id))) {
-				$assignment = new OphCiPatientadmission_NpoStatus_Procedure_Assignment;
-				$assignment->element_id = $this->id;
-				$assignment->procedure_id = $procedure_id;
-
-				if (!$assignment->save()) {
-					throw new Exception("Unable to save assignment: ".print_r($assignment->getErrors(),true));
-				}
-			}
-		}
-
-		$criteria = new CDbCriteria;
-		$criteria->addCondition('element_id = :element_id');
-		$criteria->params[':element_id'] = $this->id;
-		$criteria->addNotInCondition('procedure_id',$procedure_ids);
-
-		OphCiPatientadmission_NpoStatus_Procedure_Assignment::model()->deleteAll($criteria);
 	}
 }
 ?>

@@ -46,6 +46,8 @@
 
 class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 {
+	public $auto_update_relations = true;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -71,7 +73,7 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, translator_present_id, name_of_translator, patient_id_verified, allergies_verified, medication_history_verified, caregiver_present_id, caregiver_name, caregiver_relationship_id', 'safe'),
+			array('event_id, translator_present_id, name_of_translator, patient_id_verified, allergies_verified, medication_history_verified, caregiver_present_id, caregiver_name, caregiver_relationship_id, identifiers', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, event_id, translator_present_id, name_of_translator, patient_id_verified, allergies_verified, medication_history_verified, caregiver_present_id, caregiver_name, caregiver_relationship_id, ', 'safe', 'on' => 'search'),
@@ -94,7 +96,8 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 			'translator_present' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_TranslatorPresent', 'translator_present_id'),
 			'caregiver_present' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverPresent', 'caregiver_present_id'),
 			'caregiver_relationship' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverRelationship', 'caregiver_relationship_id'),
-			'identifiers' => array(self::HAS_MANY, 'OphCiPatientadmission_PatientDetails_Identifier_Assignment', 'element_id'),
+			'identifiers' => array(self::HAS_MANY, 'OphCiPatientadmission_PatientDetails_Identifier', 'identifier_id', 'through' => 'identifier_assignment'),
+			'identifier_assignment' => array(self::HAS_MANY, 'OphCiPatientadmission_PatientDetails_Identifier_Assignment', 'element_id'),
 		);
 	}
 

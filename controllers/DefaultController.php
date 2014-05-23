@@ -87,63 +87,7 @@ class DefaultController extends BaseEventTypeController
 			$eye = $api->getEyeForOperation($_GET['booking_event_id']);
 
 			$element->eye_id = $eye->id;
-			$element->eye = $eye;
-
 			$element->time_last_drank = $operation->booking->session_date;
 		}
-	}
-
-	/**
-	 * associate the answers and risks from the data with the Element_OphCiPatientadmission_NpoStatus element for
-	 * validation
-	 *
-	 * @param Element_OphCiPatientadmission_NpoStatus $element
-	 * @param array $data
-	 * @param $index
-	 */
-	protected function setComplexAttributes_Element_OphCiPatientadmission_NpoStatus($element, $data, $index)
-	{
-		$procedures = array();
-
-		foreach ($data['Element_OphCiPatientadmission_NpoStatus']['procedure_id'] as $procedure_id) {
-			$procedures[] = Procedure::model()->findByPk($procedure_id);
-		}
-
-		$element->procedures = $procedures;
-		$element->eye_id = $data['Element_OphCiPatientadmission_NpoStatus']['eye_id'];
-		$element->eye = Site::model()->findByPk($element->eye_id);
-	}
-
-	/**
-	 * Save procedures
-	 *
-	 * @param $element
-	 * @param $data
-	 * @param $index
-	 */
-	protected function saveComplexAttributes_Element_OphCiPatientadmission_NpoStatus($element, $data, $index)
-	{
-		$element->updateProcedures($data['Element_OphCiPatientadmission_NpoStatus']['procedure_id']);
-	}
-
-	protected function setComplexAttributes_Element_OphCiPatientadmission_PatientDetails($element, $data, $index)
-	{
-		$identifiers = array();
-
-		if (!empty($data['MultiSelect_identifiers'])) {
-			foreach ($data['MultiSelect_identifiers'] as $identifier_id) {
-				$assignment = new OphCiPatientadmission_PatientDetails_Identifier_Assignment;
-				$assignment->identifier_id = $identifier_id;
-
-				$identifiers[] = $assignment;
-			}
-		}
-
-		$element->identifiers = $identifiers;
-	}
-
-	protected function saveComplexAttributes_Element_OphCiPatientadmission_PatientDetails($element, $data, $index)
-	{
-		$element->updateMultiSelectData('OphCiPatientadmission_PatientDetails_Identifier_Assignment',empty($data['MultiSelect_identifiers']) ? array() : $data['MultiSelect_identifiers'],'identifier_id');
 	}
 }
