@@ -90,6 +90,7 @@ class DefaultController extends BaseEventTypeController
 			$element->eye = $eye;
 
 			$element->time_last_drank = $operation->booking->session_date;
+			$element->time_last_ate = $operation->booking->session_date;
 		}
 	}
 
