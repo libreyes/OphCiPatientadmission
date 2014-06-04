@@ -112,7 +112,7 @@ class DefaultController extends BaseEventTypeController
 
 		$element->procedures = $procedures;
 		$element->eye_id = $data['Element_OphCiPatientadmission_NpoStatus']['eye_id'];
-		$element->eye = Site::model()->findByPk($element->eye_id);
+		$element->eye = Eye::model()->findByPk($element->eye_id);
 	}
 
 	/**
