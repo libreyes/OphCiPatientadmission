@@ -62,12 +62,12 @@
 			<td><span class="big"><?php echo $element->site_marked_by ? $element->site_marked_by->username : 'None'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('iol_measurements_verified'))?></td>
-			<td><span class="big"><?php echo $element->iol_measurements_verified ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('iol_measurements_verified_id'))?></td>
+			<td><span class="big"><?php echo $element->iol_measurements_verified ? $element->iol_measurements_verified->name : 'Not specified'?></span></td>
 		</tr>
 		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('iol_selected'))?></td>
-			<td><span class="big"><?php echo $element->iol_selected ? 'Yes' : 'No'?></span></td>
+			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('iol_selected_id'))?></td>
+			<td><span class="big"><?php echo $element->iol_selected ? $element->iol_selected->name : 'Not specified'?></span></td>
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></td>

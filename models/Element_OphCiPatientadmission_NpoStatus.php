@@ -32,8 +32,8 @@
  * @property integer $type_of_surgery
  * @property integer $site_marked_by_x
  * @property integer $site_marked_by_id
- * @property integer $iol_measurements_verified
- * @property integer $iol_selected
+ * @property integer $iol_measurements_verified_id
+ * @property integer $iol_selected_id
  * @property string $comments
  *
  * The followings are the available model relations:
@@ -46,6 +46,9 @@
  * @property Procedure $procedure
  * @property Site $site
  * @property User $site_marked_by
+ * @property OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified $iol_measurements_verified
+ * @property OphCIPatientAdmission_NpoStatus_IolSelected $iol_selected
+ *
  */
 
 class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
@@ -79,10 +82,10 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed, procedures', 'safe'),
+			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified_id, iol_selected_id, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed, procedures', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified, iol_selected, comments', 'safe', 'on' => 'search'),
+			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified_id, iol_selected_id, comments', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -103,6 +106,8 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'site_marked_by' => array(self::BELONGS_TO, 'User', 'site_marked_by_id'),
 			'procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'through' => 'procedure_assignment'),
 			'procedure_assignment' => array(self::HAS_MANY, 'OphCiPatientadmission_NpoStatus_Procedure_Assignment', 'element_id', 'order' => 'id asc'),
+			'iol_measurements_verified' => array(self::BELONGS_TO, 'OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified', 'iol_measurements_verified_id'),
+			'iol_selected' => array(self::BELONGS_TO, 'OphCIPatientAdmission_NpoStatus_IolSelected', 'iol_selected_id'),
 		);
 	}
 
@@ -123,8 +128,8 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'type_of_surgery' => 'Type of surgery',
 			'site_marked_by_x' => 'Site marked by X by operating surgeon or staff ophthalmologist',
 			'site_marked_by_id' => 'Site marked by',
-			'iol_measurements_verified' => 'IOL measurements verified',
-			'iol_selected' => 'IOL selected',
+			'iol_measurements_verified_id' => 'IOL measurements verified',
+			'iol_selected_id' => 'IOL selected',
 			'comments' => 'Comments',
 			'time_last_ate_time' => 'Time last ate',
 			'time_last_drank_time' => 'Time last drank',
@@ -155,8 +160,8 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		$criteria->compare('type_of_surgery', $this->type_of_surgery);
 		$criteria->compare('site_marked_by_x', $this->site_marked_by_x);
 		$criteria->compare('site_marked_by_id', $this->site_marked_by_id);
-		$criteria->compare('iol_measurements_verified', $this->iol_measurements_verified);
-		$criteria->compare('iol_selected', $this->iol_selected);
+		$criteria->compare('iol_measurements_verified_id', $this->iol_measurements_verified);
+		$criteria->compare('iol_selected_id', $this->iol_selected);
 		$criteria->compare('comments', $this->comments);
 
 		return new CActiveDataProvider(get_class($this), array(
