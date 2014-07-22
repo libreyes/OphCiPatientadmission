@@ -1,14 +1,4 @@
 <?php
-
-/*
-We do the following:
-* Create 2 new tables for the options for the 2 iol questions
-* Create FK entries to the new tables in the et_ophcipatientadmission_patientdetails table
-*  * iol_measurements_verified_id
-*  * iol_selected_id
-* Create models from the tables using gii
-*/
-
 class m140722_103331_add_iol_question_options extends OEMigration
 {
 	public function up()
