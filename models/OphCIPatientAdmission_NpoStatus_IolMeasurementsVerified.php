@@ -18,38 +18,30 @@
  */
 
 /**
- * This is the model class for table "ophcipatientadmission_patientdetails_translator_present".
+ * This is the model class for table "ophcipatientadmission_npostatus_iol_measurements_verified".
  *
- * The followings are the available columns in table:
+ * The followings are the available columns in table 'ophcipatientadmission_npostatus_iol_measurements_verified':
  * @property string $id
  * @property string $name
+ * @property string $display_order
+ * @property string $last_modified_user_id
+ * @property string $last_modified_date
+ * @property string $created_user_id
+ * @property string $created_date
  *
  * The followings are the available model relations:
- *
- * @property ElementType $element_type
- * @property EventType $eventType
- * @property Event $event
- * @property User $user
- * @property User $usermodified
+ * @property EtOphcipatientadmissionNpostatus[] $etOphcipatientadmissionNpostatuses
+ * @property User $lastModifiedUser
+ * @property User $createdUser
  */
-
-class OphCiPatientadmission_PatientDetails_TranslatorPresent extends BaseActiveRecordVersioned
+class OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified extends BaseActiveRecordVersioned
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @return the static model class
-	 */
-	public static function model($className = __CLASS__)
-	{
-		return parent::model($className);
-	}
-
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ophcipatientadmission_patientdetails_translator_present';
+		return 'ophcipatientadmission_npostatus_iol_measurements_verified';
 	}
 
 	/**
@@ -60,11 +52,12 @@ class OphCiPatientadmission_PatientDetails_TranslatorPresent extends BaseActiveR
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'safe'),
 			array('name', 'required'),
+			array('name', 'length', 'max'=>128),
+			array('display_order', 'length', 'max'=>10),
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, name', 'safe', 'on' => 'search'),
+			// @todo Please remove those attributes that should not be searched.
+			array('id, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -92,48 +85,44 @@ class OphCiPatientadmission_PatientDetails_TranslatorPresent extends BaseActiveR
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+			'display_order' => 'Display Order'
 		);
 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria = new CDbCriteria;
+		$criteria=new CDbCriteria;
 
-		$criteria->compare('id', $this->id, true);
-		$criteria->compare('name', $this->name, true);
+		$criteria->compare('id',$this->id,true);
+		$criteria->compare('name',$this->name,true);
 
-		return new CActiveDataProvider(get_class($this), array(
-				'criteria' => $criteria,
-			));
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
 	}
 
 	/**
-	 * Set default values for forms on create
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified the static model class
 	 */
-	public function setDefaultOptions()
+	public static function model($className=__CLASS__)
 	{
-	}
-
-	protected function beforeSave()
-	{
-		return parent::beforeSave();
-	}
-
-	protected function afterSave()
-	{
-		return parent::afterSave();
-	}
-
-	protected function beforeValidate()
-	{
-		return parent::beforeValidate();
+		return parent::model($className);
 	}
 }
-?>

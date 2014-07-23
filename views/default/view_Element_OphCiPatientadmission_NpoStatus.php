@@ -83,12 +83,12 @@
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_marked_by ? $element->site_marked_by->username : 'None'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_measurements_verified'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_measurements_verified ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_measurements_verified_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_measurements_verified ? $element->iol_measurements_verified->name : 'Not specified'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_selected'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_selected ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_selected_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_selected ? $element->iol_selected->name : 'Not specified'?></div></div>
 		</div>
 		<?php if ($element->comments) {?>
 			<div class="row data-row">

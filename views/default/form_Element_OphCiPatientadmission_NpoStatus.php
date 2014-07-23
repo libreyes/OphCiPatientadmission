@@ -93,17 +93,7 @@
 			</div>
 		</div>
 		<?php echo $form->dropDownList($element, 'site_marked_by_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
-		<div class="row field-row">
-			<div class="large-3 column"><label></label></div>
-			<div class="large-3 column end">
-				<?php echo $form->checkBox($element, 'iol_measurements_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column"><label></label></div>
-			<div class="large-3 column end">
-				<?php echo $form->checkBox($element, 'iol_selected', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-			</div>
-		</div>
+		<?php echo $form->radioButtons($element, 'iol_measurements_verified_id', CHtml::listData(OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
+		<?php echo $form->radioButtons($element, 'iol_selected_id', CHtml::listData(OphCIPatientAdmission_NpoStatus_IolSelected::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
 		<?php echo $form->textArea($element, 'comments', array('rows' => 6, 'cols' => 80), false, array(), array('label' => 3, 'field' => 4))?>
 	</div>
