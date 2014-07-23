@@ -18,9 +18,9 @@
  */
 
 /**
- * This is the model class for table "ophcipatientadmission_npostatus_iol_measurements_verified".
+ * This is the model class for table "ophcipatientadmission_npostatus_iol_measurements_ver".
  *
- * The followings are the available columns in table 'ophcipatientadmission_npostatus_iol_measurements_verified':
+ * The followings are the available columns in table 'ophcipatientadmission_npostatus_iol_measurements_ver':
  * @property string $id
  * @property string $name
  * @property string $display_order
@@ -41,7 +41,7 @@ class OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified extends BaseActive
 	 */
 	public function tableName()
 	{
-		return 'ophcipatientadmission_npostatus_iol_measurements_verified';
+		return 'ophcipatientadmission_npostatus_iol_measurements_ver';
 	}
 
 	/**
