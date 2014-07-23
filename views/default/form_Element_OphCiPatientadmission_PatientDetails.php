@@ -18,15 +18,12 @@
  */
 ?>
 	<div class="element-fields">
-		<?php echo $form->radioButtons($element, 'translator_present_id', CHtml::listData(OphCiPatientadmission_PatientDetails_TranslatorPresent::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array('class' => 'linked-fields', 'data-linked-fields' => 'name_of_translator', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 3))?>
-		<?php echo $form->textField($element, 'name_of_translator', array('maxlength' => '255', 'hide' => $element->translator_present_id != 1), array(), array('label' => 3, 'field' => 3))?>
 		<div class="row field-row">
 			<div class="large-3 column"><label></label></div>
 			<div class="large-4 column end">
-				<?php echo $form->checkBox($element, 'patient_id_verified', array('nowrapper' => true, 'class' => 'linked-fields', 'data-linked-fields' => 'identifiers', 'data-linked-values' => '1'), array('label' => 3, 'field' => 3))?>
+				<?php echo $form->checkBox($element, 'patient_id_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 			</div>
 		</div>
-		<?php echo $form->multiSelectList($element, 'identifiers', 'identifiers', 'identifier_id', CHtml::listData(OphCiPatientadmission_PatientDetails_Identifier::model()->findAll(array('order'=>'display_order asc')),'id','name'), array(), array('empty' => '- Please select -', 'label' => 'Two identifiers'), !$element->patient_id_verified, false, null, false, false, array('label' => 3, 'field' => 4))?>
 		<div class="row field-row">
 			<div class="large-3 column"><label></label></div>
 			<div class="large-3 column end">
@@ -42,4 +39,6 @@
 		<?php echo $form->radioButtons($element, 'caregiver_present_id', CHtml::listData(OphCiPatientadmission_PatientDetails_CaregiverPresent::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array('class' => 'linked-fields', 'data-linked-fields' => 'caregiver_name,caregiver_relationship_id', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 3))?>
 		<?php echo $form->textField($element, 'caregiver_name', array('maxlength' => '255', 'hide' => $element->caregiver_present_id != 1), array(), array('label' => 3, 'field' => 3))?>
 		<?php echo $form->dropDownList($element, 'caregiver_relationship_id', CHtml::listData(OphCiPatientadmission_PatientDetails_CaregiverRelationship::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'),$element->caregiver_present_id != 1,array('label' => 3, 'field' => 3))?>
+		<?php echo $form->radioButtons($element, 'translator_present_id', CHtml::listData(OphCiPatientadmission_PatientDetails_TranslatorPresent::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array('class' => 'linked-fields', 'data-linked-fields' => 'name_of_translator', 'data-linked-values' => 'Yes'), array('label' => 3, 'field' => 3))?>
+		<?php echo $form->textField($element, 'name_of_translator', array('maxlength' => '255', 'hide' => $element->translator_present_id != 1), array(), array('label' => 3, 'field' => 3))?>
 	</div>
