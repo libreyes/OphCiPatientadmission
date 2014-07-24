@@ -27,7 +27,7 @@
 			</div>
 			<div class="large-4 column end">
 				<?php echo $form->datePicker($element, 'time_last_ate', array('maxDate' => 'today'), array('style'=>'width: 110px; display: inline-block;','nowrapper' => true,'null' => true))?>
-				<?php echo $form->textField($element, 'time_last_ate_time', array('nowrapper' => true, 'style' => 'width: 50px; display: inline-block;'))?>
+				<?php echo $form->timePicker($element, 'time_last_ate_time', array('showTimeNowButton' => false), array('nowrapper' => true))?>
 			</div>
 		</div>
 		<div class="row field-row">
@@ -38,7 +38,7 @@
 			</div>
 			<div class="large-4 column end">
 				<?php echo $form->datePicker($element, 'time_last_drank', array('maxDate' => 'today'), array('style'=>'width: 110px; display: inline-block;','nowrapper' => true,'null' => true))?>
-				<?php echo $form->textField($element, 'time_last_drank_time', array('nowrapper' => true, 'style' => 'width: 50px; display: inline-block;'))?>
+				<?php echo $form->timePicker($element, 'time_last_drank_time', array('showTimeNowButton' => false), array('nowrapper' => true))?>
 			</div>
 		</div>
 		<div class="row field-row">
