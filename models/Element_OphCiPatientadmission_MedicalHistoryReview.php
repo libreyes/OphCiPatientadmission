@@ -44,7 +44,7 @@
  * @property OphCiPatientadmission_PatientDetails_CaregiverRelationship $caregiver_relationship
  */
 
-class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
+class Element_OphCiPatientadmission_MedicalHistoryReview extends BaseEventTypeElement
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -60,7 +60,7 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophcipatientadmission_patientdetails';
+		return 'et_ophcipatientadmission_mh_review';
 	}
 
 	/**
@@ -71,10 +71,9 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, translator_present_id, name_of_translator, patient_id_verified, caregiver_present_id, caregiver_name, caregiver_relationship_id', 'safe'),
+			array('history_reviewed', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, translator_present_id, name_of_translator, patient_id_verified, caregiver_present_id, caregiver_name, caregiver_relationship_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -91,9 +90,6 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'translator_present' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_TranslatorPresent', 'translator_present_id'),
-			'caregiver_present' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverPresent', 'caregiver_present_id'),
-			'caregiver_relationship' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverRelationship', 'caregiver_relationship_id'),
 		);
 	}
 
@@ -105,12 +101,7 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'translator_present_id' => 'Translator present',
-			'name_of_translator' => 'Name of translator',
-			'patient_id_verified' => 'Patient ID /wristband verified with two identifiers',
-			'caregiver_present_id' => 'Caregiver present',
-			'caregiver_name' => 'Caregiver name',
-			'caregiver_relationship_id' => 'Caregiver relationship',
+			'history_reviewed' => 'Medical history reviewed?',
 		);
 	}
 
@@ -127,41 +118,9 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('translator_present_id', $this->translator_present_id);
-		$criteria->compare('name_of_translator', $this->name_of_translator);
-		$criteria->compare('patient_id_verified', $this->patient_id_verified);
-		$criteria->compare('caregiver_present_id', $this->caregiver_present_id);
-		$criteria->compare('caregiver_name', $this->caregiver_name);
-		$criteria->compare('caregiver_relationship_id', $this->caregiver_relationship_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
 	}
-
-	protected function afterValidate()
-	{
-		if ($this->translator_present_id == 1) {
-			if (!$this->name_of_translator) {
-				$this->addError('name_of_translator',$this->getAttributeLabel('name_of_translator').' cannot be blank');
-			}
-		} else {
-			$this->name_of_translator = '';
-		}
-
-		if ($this->caregiver_present_id == 1) {
-			if (!$this->caregiver_name) {
-				$this->addError('caregiver_name',$this->getAttributeLabel('caregiver_name').' cannot be blank');
-			}
-			if (!$this->caregiver_relationship_id) {
-				$this->addError('caregiver_relationship_id',$this->getAttributeLabel('caregiver_relationship_id').' cannot be blank');
-			}
-		} else {
-			$this->caregiver_name = '';
-			$this->caregiver_relationship_id = null;
-		}
-
-		return parent::afterValidate();
-	}
 }
-?>

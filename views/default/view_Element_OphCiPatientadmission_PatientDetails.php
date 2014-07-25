@@ -23,14 +23,6 @@
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->patient_id_verified ? 'Yes' : 'No'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('allergies_verified'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->allergies_verified ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('medication_history_verified'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->medication_history_verified ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('caregiver_present_id'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->caregiver_present ? $element->caregiver_present->name : 'Not specified'?></div></div>
 		</div>

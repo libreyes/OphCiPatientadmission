@@ -90,4 +90,22 @@ class DefaultController extends BaseEventTypeController
 			$element->time_last_drank = $operation->booking->session_date;
 		}
 	}
+
+	public function getMedicationHistory()
+	{
+		if (!$api = Yii::app()->moduleAPI->get('OphCiAnaestheticassessment')) {
+			throw new Exception("Unable to load API for OphCiAnaestheticassessment");
+		}
+		
+		return $api->getMedicationHistoryForPatient($this->patient->id);
+	}
+
+	public function getAllergiesHistory()
+	{
+		if (!$api = Yii::app()->moduleAPI->get('OphCiAnaestheticassessment')) {
+			throw new Exception("Unable to load API for OphCiAnaestheticassessment");
+		}
+
+		return $api->getAllergiesHistoryForPatient($this->patient->id);
+	}
 }
