@@ -67,7 +67,7 @@ class m140729_153255_no_booking_link_and_element_changes extends OEMigration
 				'last_modified_user_id' => $row['last_modified_user_id'],
 				'last_modified_date' => $row['last_modified_date'],
 				'created_user_id' => $row['created_user_id'],
-				'created_user_date' => $row['created_user_date'],
+				'created_date' => $row['created_date'],
 			));
 
 			foreach ($this->dbConnection->createCommand()->select("*")->from("et_ophcipatientadmission_npostatus_version")->where("id = {$row['id']}")->order('version_id asc')->queryAll() as $v) {
@@ -86,7 +86,7 @@ class m140729_153255_no_booking_link_and_element_changes extends OEMigration
 					'last_modified_user_id' => $v['last_modified_user_id'],
 					'last_modified_date' => $v['last_modified_date'],
 					'created_user_id' => $v['created_user_id'],
-					'created_user_date' => $v['created_user_date'],
+					'created_date' => $v['created_date'],
 				));
 			}
 		}
