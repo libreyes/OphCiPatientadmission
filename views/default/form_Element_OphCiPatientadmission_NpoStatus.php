@@ -18,7 +18,6 @@
  */
 ?>
 	<div class="element-fields">
-		<input type="hidden" name="Element_OphCiPatientadmission_NpoStatus[booking_event_id]" value="<?php echo $element->id ? $element->booking_event_id : @$_GET['booking_event_id']?>" />
 		<div class="row field-row">
 			<div class="large-3 column">
 				<label for="Element_OphCiPatientadmission_NpoStatus_time_last_ate_0">
@@ -41,58 +40,6 @@
 				<?php echo $form->timePicker($element, 'time_last_drank_time', array('showTimeNowButton' => false), array('nowrapper' => true))?>
 			</div>
 		</div>
-		<div class="row field-row">
-			<div class="large-3 column"><label></label></div>
-			<div class="large-3 column end">
-				<?php echo $form->checkBox($element, 'procedure_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-			</div>
-		</div>
-		<div id="div_Element_OphCiPatientadmission_NpoStatus_procedures" class="row field-row">
-			<div class="large-3 column">
-				<label for="Element_OphCiPatientadmission_NpoStatus_procedures">
-					<?php echo $element->getAttributeLabel('procedures')?>:
-				</label>
-			</div>
-			<div class="large-3 column end">
-				<?php foreach ($element->procedures as $procedure) {?>
-					<div><?php echo $procedure->term?></div>
-					<input type="hidden" name="<?php echo get_class($element)?>[procedures][]" value="<?php echo $procedure->id?>" />
-				<?php }?>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column"><label></label></div>
-			<div class="large-3 column end">
-				<?php echo $form->checkBox($element, 'site_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-			</div>
-		</div>
-		<div id="div_Element_OphCiPatientadmission_NpoStatus_eye_id" class="row field-row">
-			<div class="large-3 column">
-				<label for="Element_OphCiPatientadmission_NpoStatus_eye_id">
-					<?php echo $element->getAttributeLabel('eye_id')?>:
-				</label>
-			</div>
-			<div class="large-3 column end">
-				<?php echo $element->eye->name?>
-				<input type="hidden" name="Element_OphCiPatientadmission_NpoStatus[eye_id]" value="<?php echo $element->eye_id?>" />
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<label>Consent:</label>
-			</div>
-			<div class="large-9 column">
-				<?php echo $form->checkBox($element, 'signed_and_witnessed', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-				<?php echo $form->checkBox($element, 'type_of_surgery', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-				<?php echo $form->checkBox($element, 'correct_site_confirmed', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-9 column end">
-				<?php echo $form->checkBox($element, 'site_marked_by_x', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-			</div>
-		</div>
-		<?php echo $form->dropDownList($element, 'site_marked_by_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
 		<?php echo $form->radioButtons($element, 'iol_measurements_verified_id', CHtml::listData(OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
 		<?php echo $form->radioButtons($element, 'iol_selected_id', CHtml::listData(OphCIPatientAdmission_NpoStatus_IolSelected::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
 		<?php echo $form->textArea($element, 'comments', array('rows' => 6, 'cols' => 80), false, array(), array('label' => 3, 'field' => 4))?>

@@ -82,10 +82,10 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified_id, iol_selected_id, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed, procedures', 'safe'),
+			array('event_id, time_last_ate, time_last_drank, iol_measurements_verified_id, iol_selected_id, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, time_last_ate, time_last_drank, procedure_verified, site_verified, eye_id, signed_and_witnessed, type_of_surgery, site_marked_by_x, site_marked_by_id, iol_measurements_verified_id, iol_selected_id, comments', 'safe', 'on' => 'search'),
+			array('id, event_id, time_last_ate, time_last_drank, iol_measurements_verified_id, iol_selected_id, comments', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -104,8 +104,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'eye' => array(self::BELONGS_TO, 'Eye', 'eye_id'),
 			'site_marked_by' => array(self::BELONGS_TO, 'User', 'site_marked_by_id'),
-			'procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'through' => 'procedure_assignment'),
-			'procedure_assignment' => array(self::HAS_MANY, 'OphCiPatientadmission_NpoStatus_Procedure_Assignment', 'element_id', 'order' => 'id asc'),
 			'iol_measurements_verified' => array(self::BELONGS_TO, 'OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified', 'iol_measurements_verified_id'),
 			'iol_selected' => array(self::BELONGS_TO, 'OphCIPatientAdmission_NpoStatus_IolSelected', 'iol_selected_id'),
 		);
@@ -121,20 +119,11 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'event_id' => 'Event',
 			'time_last_ate' => 'Time last ate',
 			'time_last_drank' => 'Time last drank',
-			'procedure_verified' => 'Procedure verified',
-			'site_verified' => 'Site verified',
-			'eye_id' => 'Eye',
-			'signed_and_witnessed' => 'Signed and witnessed',
-			'type_of_surgery' => 'Type of surgery',
-			'site_marked_by_x' => 'Site marked by X by operating surgeon or staff ophthalmologist',
-			'site_marked_by_id' => 'Site marked by',
 			'iol_measurements_verified_id' => 'IOL measurements verified',
 			'iol_selected_id' => 'IOL selected',
 			'comments' => 'Comments',
 			'time_last_ate_time' => 'Time last ate',
 			'time_last_drank_time' => 'Time last drank',
-			'procedures' => 'Procedures',
-			'correct_site_confirmed' => 'Correct site confirmed',
 		);
 	}
 

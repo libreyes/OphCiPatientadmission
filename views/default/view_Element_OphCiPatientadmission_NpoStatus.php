@@ -27,62 +27,6 @@
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->time_last_drank ? $element->NHSDate('time_last_drank').' '.substr($element->time_last_drank,11,5) : 'Not recorded'?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedure_verified'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->procedure_verified ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedure_id'))?></div></div>
-			<div class="large-9 column end">
-				<div class="data-value">
-					<?php foreach ($element->procedures as $procedure) {?>
-						<?php echo $procedure->term?><br/>
-					<?php }?>
-				</div>
-			</div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_verified'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_verified ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('eye_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->eye ? $element->eye->name : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column">
-				<div class="data-label">Consent</div>
-			</div>
-			<div class="large-9 column end">
-				<div class="row data-row">
-					<div class="large-4 column">
-						<div class="data-value">
-							<?php if (!$element->signed_and_witnessed && !$element->type_of_surgery && !$element->correct_site_confirmed) {?>
-								None
-							<?php }else{
-								if ($element->signed_and_witnessed) {?>
-										<div><?php echo CHtml::encode($element->getAttributeLabel('signed_and_witnessed'))?></div>
-								<?php }
-								if ($element->type_of_surgery) {?>
-									<div><?php echo CHtml::encode($element->getAttributeLabel('type_of_surgery'))?></div>
-								<?php }
-								if ($element->correct_site_confirmed) {?>
-									<div><?php echo CHtml::encode($element->getAttributeLabel('correct_site_confirmed'))?></div>
-								<?php }
-							}?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_x'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_marked_by_x ? 'Yes' : 'No'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_marked_by ? $element->site_marked_by->username : 'None'?></div></div>
-		</div>
-		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_measurements_verified_id'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_measurements_verified ? $element->iol_measurements_verified->name : 'Not specified'?></div></div>
 		</div>
