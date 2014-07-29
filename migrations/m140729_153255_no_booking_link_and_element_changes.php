@@ -35,7 +35,7 @@ class m140729_153255_no_booking_link_and_element_changes extends OEMigration
 				'type_of_surgery' => 'tinyint(1) unsigned not null',
 				'correct_site_confirmed' => 'tinyint(1) unsigned not null',
 				'site_marked_by_x' => 'tinyint(1) unsigned not null',
-				'site_marked_by_id' => 'int(10) unsigned not null',
+				'site_marked_by_id' => 'int(10) unsigned null',
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
