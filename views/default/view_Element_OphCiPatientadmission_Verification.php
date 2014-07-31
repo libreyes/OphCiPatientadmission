@@ -58,6 +58,6 @@
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_id'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_marked_by ? $element->site_marked_by->username : 'None'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_marked_by ? $element->site_marked_by->fullName : 'None'?></div></div>
 		</div>
 	</div>
