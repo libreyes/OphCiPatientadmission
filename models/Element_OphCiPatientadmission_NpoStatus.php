@@ -187,7 +187,7 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 
 	protected function afterValidate()
 	{
-		if (strlen($this->time_last_ate_time) >0) {
+		if (strlen($this->time_last_ate_time) >0 && strlen($this->time_last_ate) > 0 ) {
 			if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->time_last_ate_time,$m) || $m[1] > 23 || $m[2] > 59) {
 				$this->addError('time_last_ate_time','Invalid time format for '.$this->getAttributeLabel('time_last_ate_time'));
 			} else {
@@ -195,12 +195,21 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			}
 		}
 
-		if (strlen($this->time_last_drank_time) >0) {
+		if (strlen($this->time_last_drank_time) >0 && strlen($this->time_last_drank) > 0) {
 			if (!preg_match('/^([0-9]{1,2}):([0-9]{2})$/',$this->time_last_drank_time,$m) || $m[1] > 23 || $m[2] > 59) {
 				$this->addError('time_last_drank_time','Invalid time format for '.$this->getAttributeLabel('time_last_drank_time'));
 			} else {
 				$this->time_last_drank = date('Y-m-d',strtotime($this->time_last_drank)).' '.str_pad($m[1],2,"0",STR_PAD_LEFT).":".$m[2].":00";
 			}
+		}
+
+		if(strlen($this->time_last_drank) == 0){
+			$this->time_last_drank = null;
+			$this->time_last_drank_time = null;
+		}
+		if(strlen($this->time_last_ate) == 0){
+			$this->time_last_ate = null;
+			$this->time_last_ate_time = null;
 		}
 
 		return parent::afterValidate();

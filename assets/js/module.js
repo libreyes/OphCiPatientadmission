@@ -38,6 +38,25 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+	$('.Element_OphCiPatientadmission_NpoStatus').on('change', [
+		'#Element_OphCiPatientadmission_NpoStatus_time_last_ate_0',
+		'#Element_OphCiPatientadmission_NpoStatus_time_last_drank_0',
+	].join(','), function(e) {
+		if(typeof e.target.id != 'undefined' && $('#'+e.target.id).val().trim() == ''){
+			switch(e.target.id) {
+				case 'Element_OphCiPatientadmission_NpoStatus_time_last_ate_0':
+					$('#Element_OphCiPatientadmission_NpoStatus_time_last_ate_time').val('');
+					break;
+				case 'Element_OphCiPatientadmission_NpoStatus_time_last_drank_0':
+					$('#Element_OphCiPatientadmission_NpoStatus_time_last_drank_time').val('');
+					break;
+				default:
+					return;
+			}
+		}
+		console.log('in costante escalation' + e.target.id);
+	});
 });
 
 function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f + str.substr(1); }
