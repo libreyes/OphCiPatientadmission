@@ -107,7 +107,7 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 			'event_id' => 'Event',
 			'translator_present_id' => 'Translator present',
 			'name_of_translator' => 'Name of translator',
-			'patient_id_verified' => 'Patient ID /wristband verified with two identifiers',
+			'patient_id_verified' => 'Patient ID verified and ID band applied',
 			'caregiver_present_id' => 'Caregiver present',
 			'caregiver_name' => 'Caregiver name',
 			'caregiver_relationship_id' => 'Caregiver relationship',
