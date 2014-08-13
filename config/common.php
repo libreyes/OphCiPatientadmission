@@ -20,7 +20,6 @@
 return array(
 	'params' => array(
 		'admin_menu' => array(
-			'Patient admission patient identifiers' => '/OphCiPatientadmission/admin/editPatientIdentifiers',
 			'Caregiver relationships' => '/OphCiPatientadmission/admin/editCaregiverRelationships',
 		),
 	),

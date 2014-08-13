@@ -19,11 +19,6 @@
 
 class AdminController extends ModuleAdminController
 {
-	public function actionEditPatientIdentifiers()
-	{
-		$this->genericAdmin('Patient identifiers','OphCiPatientadmission_PatientDetails_Identifier');
-	}
-
 	public function actionEditCaregiverRelationships()
 	{
 		$this->genericAdmin('Caregiver relationships','OphCiPatientadmission_PatientDetails_CaregiverRelationship');
