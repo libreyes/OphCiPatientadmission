@@ -21,17 +21,11 @@ class AdminController extends ModuleAdminController
 {
 	public function actionEditPatientIdentifiers()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Patient identifiers',
-			'model' => 'OphCiPatientadmission_PatientDetails_Identifier',
-		));
+		$this->genericAdmin('Patient identifiers','OphCiPatientadmission_PatientDetails_Identifier');
 	}
 
 	public function actionEditCaregiverRelationships()
 	{
-		$this->render('//admin/generic_admin',array(
-			'title' => 'Caregiver relationships',
-			'model' => 'OphCiPatientadmission_PatientDetails_CaregiverRelationship',
-		));
+		$this->genericAdmin('Caregiver relationships','OphCiPatientadmission_PatientDetails_CaregiverRelationship');
 	}
 }
