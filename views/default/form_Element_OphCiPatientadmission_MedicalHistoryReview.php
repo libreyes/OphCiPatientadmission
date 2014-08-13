@@ -51,23 +51,12 @@
 				</table>
 			</div>
 		</div>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<label>Allergies history:</label>
-			</div>
-			<div class="large-9 column end">
-				<?php if ($allergies = $this->getAllergiesHistory()) {?>
-					<?php foreach ($allergies as $allergy) {?>
-						<?php echo $allergy->allergy->name?><br/>
-					<?php }?>
-				<?php }else{?>
-					<tr>
-						<td colspan="5">
-							No allergies have been recorded for this patient.
-						</td>
-					</tr>
-				<?php }?>
-			</div>
-		</div>
+		<?php $this->widget('application.widgets.AllergySelection', array(
+			'form' => $form,
+			'patient' => $this->patient,
+			'label' => 'Allergies history',
+			'edit' => false,
+			'allow_collapse' => false,
+		))?>
 		<?php echo $form->radioBoolean($element, 'history_reviewed', array(), array('label' => 3, 'field' => 4))?>
 	</div>
