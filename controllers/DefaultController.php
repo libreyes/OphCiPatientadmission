@@ -23,13 +23,4 @@ class DefaultController extends BaseEventTypeController
 
 		return $api->getAllergiesHistoryForPatient($this->patient->id);
 	}
-
-	public function getOpenBookings()
-	{
-		if ($api = Yii::app()->moduleAPI->get('OphTrOperationbooking')) {
-			return $api->getOpenBookingsForPatient($this->episode->patient_id);
-		}
-
-		throw new Exception("OphTrOperationbooking API not available");
-	}
 }
