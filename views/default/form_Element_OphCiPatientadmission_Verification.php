@@ -20,43 +20,6 @@
 	<div class="element-fields">
 		<div class="row field-row">
 			<div class="large-3 column"><label></label></div>
-			<div class="large-6 column end">
-				<table>
-					<thead>
-						<tr>
-							<th>Booking date</th>
-							<th>Eye</th>
-							<th>Procedure(s)</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						$bookings = $this->getOpenBookings();
-						if (empty($bookings)) {?>
-							<tr>
-								<td colspan="3">
-									There are no scheduled bookings for this patient.
-								</td>
-							</tr>
-						<?php }else{
-							foreach ($bookings as $booking) {?>
-								<tr>
-									<td><?php echo $booking->NHSDate('session_date')?></td>
-									<td><?php echo $booking->operation->eye->name?></td>
-									<td>
-										<?php foreach ($booking->operation->procedures as $procedure) {
-											echo $procedure->term."<br/>";
-										}?>
-									</td>
-								</tr>
-							<?php }
-						}?>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="row field-row">
-			<div class="large-3 column"><label></label></div>
 			<div class="large-3 column end">
 				<?php echo $form->checkBox($element, 'procedure_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 				<?php echo $form->checkBox($element, 'site_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>

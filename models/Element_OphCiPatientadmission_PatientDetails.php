@@ -28,7 +28,7 @@
  * @property integer $patient_id_verified
  * @property integer $allergies_verified
  * @property integer $medication_history_verified
- * @property integer $caregiver_present_id
+ * @property integer $caregivers_present_id
  * @property string $caregiver_name
  * @property integer $caregiver_relationship_id
  *
@@ -40,7 +40,7 @@
  * @property User $user
  * @property User $usermodified
  * @property OphCiPatientadmission_PatientDetails_TranslatorPresent $translator_present
- * @property OphCiPatientadmission_PatientDetails_CaregiverPresent $caregiver_present
+ * @property OphCiPatientadmission_PatientDetails_CaregiverPresent $caregivers_present
  * @property OphCiPatientadmission_PatientDetails_CaregiverRelationship $caregiver_relationship
  */
 
@@ -71,10 +71,10 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, translator_present_id, name_of_translator, patient_id_verified, caregiver_present_id, caregiver_name, caregiver_relationship_id', 'safe'),
+			array('event_id, translator_present_id, name_of_translator, patient_id_verified, caregivers_present_id, caregiver_name1, caregiver_name2, caregiver_relationship1_id, caregiver_relationship2_id', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, translator_present_id, name_of_translator, patient_id_verified, caregiver_present_id, caregiver_name, caregiver_relationship_id, ', 'safe', 'on' => 'search'),
+			array('id, event_id, translator_present_id, name_of_translator, patient_id_verified, caregivers_present_id, caregiver_name1, caregiver_name2, caregiver_relationship1_id, caregiver_relationship2_id, ', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -92,8 +92,9 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'translator_present' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_TranslatorPresent', 'translator_present_id'),
-			'caregiver_present' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverPresent', 'caregiver_present_id'),
-			'caregiver_relationship' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverRelationship', 'caregiver_relationship_id'),
+			'caregivers_present' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverPresent', 'caregivers_present_id'),
+			'caregiver_relationship1' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverRelationship', 'caregiver_relationship1_id'),
+			'caregiver_relationship2' => array(self::BELONGS_TO, 'OphCiPatientadmission_PatientDetails_CaregiverRelationship', 'caregiver_relationship2_id'),
 		);
 	}
 
@@ -108,9 +109,11 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 			'translator_present_id' => 'Translator present',
 			'name_of_translator' => 'Name of translator',
 			'patient_id_verified' => 'Patient ID verified and ID band applied',
-			'caregiver_present_id' => 'Caregiver present',
-			'caregiver_name' => 'Caregiver name',
-			'caregiver_relationship_id' => 'Caregiver relationship',
+			'caregivers_present_id' => 'Care givers present',
+			'caregiver_name1' => 'Name',
+			'caregiver_name2' => 'Name',
+			'caregiver_relationship1_id' => 'Relationship',
+			'caregiver_relationship2_id' => 'Relationship',
 		);
 	}
 
@@ -130,9 +133,11 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 		$criteria->compare('translator_present_id', $this->translator_present_id);
 		$criteria->compare('name_of_translator', $this->name_of_translator);
 		$criteria->compare('patient_id_verified', $this->patient_id_verified);
-		$criteria->compare('caregiver_present_id', $this->caregiver_present_id);
-		$criteria->compare('caregiver_name', $this->caregiver_name);
-		$criteria->compare('caregiver_relationship_id', $this->caregiver_relationship_id);
+		$criteria->compare('caregivers_present_id', $this->caregivers_present_id);
+		$criteria->compare('caregiver_name1', $this->caregiver_name);
+		$criteria->compare('caregiver_name2', $this->caregiver_name);
+		$criteria->compare('caregiver_relationship1_id', $this->caregiver_relationship_id);
+		$criteria->compare('caregiver_relationship2_id', $this->caregiver_relationship_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
@@ -149,16 +154,18 @@ class Element_OphCiPatientadmission_PatientDetails extends BaseEventTypeElement
 			$this->name_of_translator = '';
 		}
 
-		if ($this->caregiver_present_id == 1) {
-			if (!$this->caregiver_name) {
-				$this->addError('caregiver_name',$this->getAttributeLabel('caregiver_name').' cannot be blank');
+		if ($this->caregivers_present && $this->caregivers_present->name == 'Yes') {
+			if (!$this->caregiver_name1) {
+				$this->addError('caregiver_name1',$this->getAttributeLabel('caregiver_name1').' cannot be blank');
 			}
-			if (!$this->caregiver_relationship_id) {
-				$this->addError('caregiver_relationship_id',$this->getAttributeLabel('caregiver_relationship_id').' cannot be blank');
+			if (!$this->caregiver_relationship1_id) {
+				$this->addError('caregiver_relationship1_id',$this->getAttributeLabel('caregiver_relationship1_id').' cannot be blank');
 			}
 		} else {
-			$this->caregiver_name = '';
-			$this->caregiver_relationship_id = null;
+			$this->caregiver_name1 = '';
+			$this->caregiver_relationship1_id = null;
+			$this->caregiver_name2 = '';
+			$this->caregiver_relationship2_id = null;
 		}
 
 		return parent::afterValidate();
