@@ -19,11 +19,11 @@
 ?>
 	<div class="element-data">
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_ate'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->time_last_ate ? $element->NHSDate('time_last_ate').' '.substr($element->time_last_ate,11,5) : 'Not recorded'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_measurements_verified_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_measurements_verified->name ?></div></div>
 		</div>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_drank'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->time_last_drank ? $element->NHSDate('time_last_drank').' '.substr($element->time_last_drank,11,5) : 'Not recorded'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('iol_selected_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->iol_selected->name ?></div></div>
 		</div>
 	</div>

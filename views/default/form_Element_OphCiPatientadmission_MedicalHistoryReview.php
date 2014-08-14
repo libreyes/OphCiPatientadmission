@@ -18,6 +18,7 @@
  */
 ?>
 	<div class="element-fields">
+		<?php echo $form->radioBoolean($element, 'history_reviewed', array(), array('label' => 3, 'field' => 4))?>
 		<div class="row field-row">
 			<div class="large-3 column">
 				<label>Medication history:</label>
@@ -58,5 +59,4 @@
 			'edit' => false,
 			'allow_collapse' => false,
 		))?>
-		<?php echo $form->radioBoolean($element, 'history_reviewed', array(), array('label' => 3, 'field' => 4))?>
 	</div>

@@ -20,9 +20,9 @@
 	<div class="element-fields">
 		<div class="row field-row">
 			<div class="large-3 column"><label></label></div>
-			<div class="large-3 column end">
-				<?php echo $form->checkBox($element, 'procedure_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-				<?php echo $form->checkBox($element, 'site_verified', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
+			<div class="large-4 column end">
+				<?php echo $form->radioButtons($element, 'procedure_verified_id', 'OphCiPatientadmission_Procedure_Verified', null, false, false, false, false, array(), array('label' => 5, 'field' => 5))?>
+				<?php echo $form->radioButtons($element, 'site_verified_id', 'OphCiPatientadmission_Site_Verified', null, false, false, false, false, array(), array('label' => 5, 'field' => 5))?>
 			</div>
 		</div>
 		<div class="row field-row">
@@ -35,13 +35,6 @@
 				<?php echo $form->checkBox($element, 'correct_site_confirmed', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
 			</div>
 		</div>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<label></label>
-			</div>
-			<div class="large-9 column end">
-				<?php echo $form->checkBox($element, 'site_marked_by_x', array('nowrapper' => true), array('label' => 3, 'field' => 3))?>
-			</div>
-		</div>
+		<?php echo $form->radioButtons($element, 'site_marked_by_x_id', 'OphCiPatientadmission_Site_Marked_By_X', null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
 		<?php echo $form->dropDownList($element, 'site_marked_by_id', CHtml::listData(User::model()->findAll(array('order'=> 'first_name asc, last_name asc')),'id','fullName'),array('empty'=>'- Please select -'),false,array('label' => 3, 'field' => 3))?>
 	</div>

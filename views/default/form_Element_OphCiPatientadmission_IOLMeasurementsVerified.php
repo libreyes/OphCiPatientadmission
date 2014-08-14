@@ -17,13 +17,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-	<div class="element-data">
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_ate'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->time_last_ate ? $element->NHSDate('time_last_ate').' '.substr($element->time_last_ate,11,5) : 'Not recorded'?></div></div>
-		</div>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('time_last_drank'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->time_last_drank ? $element->NHSDate('time_last_drank').' '.substr($element->time_last_drank,11,5) : 'Not recorded'?></div></div>
-		</div>
+	<div class="element-fields">
+		<?php echo $form->radioButtons($element, 'iol_measurements_verified_id', 'OphCiPatientadmission_IolMeasurementsVerified', null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
+		<?php echo $form->radioButtons($element, 'iol_selected_id', 'OphCiPatientadmission_IolSelected', null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
 	</div>

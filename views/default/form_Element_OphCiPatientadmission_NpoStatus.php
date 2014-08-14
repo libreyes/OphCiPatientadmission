@@ -40,7 +40,4 @@
 				<?php echo $form->timePicker($element, 'time_last_drank_time', array('showTimeNowButton' => false), array('nowrapper' => true))?>
 			</div>
 		</div>
-		<?php echo $form->radioButtons($element, 'iol_measurements_verified_id', CHtml::listData(OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
-		<?php echo $form->radioButtons($element, 'iol_selected_id', CHtml::listData(OphCIPatientAdmission_NpoStatus_IolSelected::model()->findAll(array('order'=>'display_order asc')),'id','name'), null, false, false, false, false, array(), array('label' => 3, 'field' => 3))?>
-		<?php echo $form->textArea($element, 'comments', array('rows' => 6, 'cols' => 80), false, array(), array('label' => 3, 'field' => 4))?>
 	</div>

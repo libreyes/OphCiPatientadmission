@@ -82,10 +82,10 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, time_last_ate, time_last_drank, iol_measurements_verified_id, iol_selected_id, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed', 'safe'),
+			array('event_id, time_last_ate, time_last_drank, comments, time_last_ate_time, time_last_drank_time, booking_event_id, correct_site_confirmed', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, time_last_ate, time_last_drank, iol_measurements_verified_id, iol_selected_id, comments', 'safe', 'on' => 'search'),
+			array('id, event_id, time_last_ate, time_last_drank, comments', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -104,8 +104,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'eye' => array(self::BELONGS_TO, 'Eye', 'eye_id'),
 			'site_marked_by' => array(self::BELONGS_TO, 'User', 'site_marked_by_id'),
-			'iol_measurements_verified' => array(self::BELONGS_TO, 'OphCIPatientAdmission_NpoStatus_IolMeasurementsVerified', 'iol_measurements_verified_id'),
-			'iol_selected' => array(self::BELONGS_TO, 'OphCIPatientAdmission_NpoStatus_IolSelected', 'iol_selected_id'),
 		);
 	}
 
@@ -119,8 +117,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 			'event_id' => 'Event',
 			'time_last_ate' => 'Time last ate',
 			'time_last_drank' => 'Time last drank',
-			'iol_measurements_verified_id' => 'IOL measurements verified',
-			'iol_selected_id' => 'IOL selected',
 			'comments' => 'Comments',
 			'time_last_ate_time' => 'Time last ate',
 			'time_last_drank_time' => 'Time last drank',
@@ -149,8 +145,6 @@ class Element_OphCiPatientadmission_NpoStatus extends BaseEventTypeElement
 		$criteria->compare('type_of_surgery', $this->type_of_surgery);
 		$criteria->compare('site_marked_by_x', $this->site_marked_by_x);
 		$criteria->compare('site_marked_by_id', $this->site_marked_by_id);
-		$criteria->compare('iol_measurements_verified_id', $this->iol_measurements_verified);
-		$criteria->compare('iol_selected_id', $this->iol_selected);
 		$criteria->compare('comments', $this->comments);
 
 		return new CActiveDataProvider(get_class($this), array(

@@ -20,11 +20,11 @@
 	<div class="element-data">
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('procedure_verified'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->procedure_verified ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->procedure_verified->name ?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_verified'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_verified ? 'Yes' : 'No'?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_verified->name?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column">
@@ -53,8 +53,8 @@
 			</div>
 		</div>
 		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_x'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_marked_by_x ? 'Yes' : 'No'?></div></div>
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_x_id'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->site_marked_by_x->name ?></div></div>
 		</div>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('site_marked_by_id'))?></div></div>

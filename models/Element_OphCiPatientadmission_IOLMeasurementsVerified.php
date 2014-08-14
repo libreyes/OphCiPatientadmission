@@ -51,8 +51,9 @@
  *
  */
 
-class Element_OphCiPatientadmission_Verification extends BaseEventTypeElement
+class Element_OphCiPatientadmission_IOLMeasurementsVerified extends BaseEventTypeElement
 {
+	public $auto_update_relations = true;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -67,7 +68,7 @@ class Element_OphCiPatientadmission_Verification extends BaseEventTypeElement
 	 */
 	public function tableName()
 	{
-		return 'et_ophcipatientadmission_verification';
+		return 'et_ophcipatientadmission_iol_measurements_verified';
 	}
 
 	/**
@@ -78,7 +79,7 @@ class Element_OphCiPatientadmission_Verification extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, procedure_verified_id, site_verified_id, signed_and_witnessed, type_of_surgery, site_marked_by_x_id, site_marked_by_id, correct_site_confirmed', 'safe'),
+			array('event_id, iol_measurements_verified_id, iol_selected_id', 'safe'),
 		);
 	}
 
@@ -91,14 +92,12 @@ class Element_OphCiPatientadmission_Verification extends BaseEventTypeElement
 		// class name for the relations automatically generated below.
 		return array(
 			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
-			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
+//			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'site_marked_by' => array(self::BELONGS_TO, 'User', 'site_marked_by_id'),
-			'procedure_verified' => array(self::BELONGS_TO, 'OphCiPatientadmission_Procedure_Verified', 'procedure_verified_id'),
-			'site_verified' => array(self::BELONGS_TO, 'OphCiPatientadmission_Site_Verified', 'site_verified_id'),
-			'site_marked_by_x' => array(self::BELONGS_TO, 'OphCiPatientadmission_Site_Marked_By_X', 'site_marked_by_x_id'),
+			'iol_measurements_verified' => array(self::BELONGS_TO, 'OphCiPatientadmission_IolMeasurementsVerified', 'iol_measurements_verified_id'),
+			'iol_selected' => array(self::BELONGS_TO, 'OphCiPatientadmission_IolSelected', 'iol_selected_id'),
 		);
 	}
 
@@ -110,13 +109,8 @@ class Element_OphCiPatientadmission_Verification extends BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'procedure_verified_id' => 'Procedure verified',
-			'site_verified_id' => 'Site verified',
-			'signed_and_witnessed' => 'Signed and witnessed',
-			'type_of_surgery' => 'Type of surgery',
-			'site_marked_by_x_id' => 'Site marked by X by operating surgeon or staff ophthalmologist',
-			'site_marked_by_id' => 'Site marked by',
-			'correct_site_confirmed' => 'Correct site confirmed',
+			'iol_measurements_verified_id' => 'IOL measurements are verified',
+			'iol_selected_id' => 'IOL Selected',
 		);
 	}
 
@@ -133,18 +127,8 @@ class Element_OphCiPatientadmission_Verification extends BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-		$criteria->compare('time_last_ate', $this->time_last_ate);
-		$criteria->compare('time_last_drank', $this->time_last_drank);
-		$criteria->compare('procedure_verified_id', $this->procedure_verified_id);
-		$criteria->compare('site_verified_id', $this->site_verified_id);
-		$criteria->compare('eye_id', $this->eye_id);
-		$criteria->compare('signed_and_witnessed', $this->signed_and_witnessed);
-		$criteria->compare('type_of_surgery', $this->type_of_surgery);
-		$criteria->compare('site_marked_by_x_id', $this->site_marked_by_x_id);
-		$criteria->compare('site_marked_by_id', $this->site_marked_by_id);
-		$criteria->compare('iol_measurements_verified_id', $this->iol_measurements_verified);
-		$criteria->compare('iol_selected_id', $this->iol_selected);
-		$criteria->compare('comments', $this->comments);
+		$criteria->compare('iol_measurements_verified_id', $this->iol_measurements_verified_id);
+		$criteria->compare('iol_selected_id', $this->iol_selected_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
