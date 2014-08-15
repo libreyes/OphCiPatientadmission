@@ -22,9 +22,44 @@
 }
 /* line 19, ../sass/components/_event.scss */
 .event .event-content {
-  background-image: url('../img/watermark.png?1406886582');
+  background-image: url('../img/watermark.png?1407516179');
 }
 /* line 22, ../sass/components/_event.scss */
 .event .event-title {
-  background-image: url('../img/medium.png?1405957429');
+  background-image: url('../img/medium.png?1406619605');
+}
+
+/* line 28, ../sass/components/_event.scss */
+.addRecordItemDiv label {
+  width: 10em;
+  margin-top: 5px;
+}
+/* line 32, ../sass/components/_event.scss */
+.addRecordItemDiv input.recordInput {
+  width: 5em;
+}
+/* line 35, ../sass/components/_event.scss */
+.addRecordItemDiv .large-2 {
+  display: inline-block !important;
+  margin-left: -2.2em;
+  margin-top: 3px;
+}
+/* line 40, ../sass/components/_event.scss */
+.addRecordItemDiv .recordTimestamp {
+  width: 6.8em;
+  display: inline-block;
+}
+/* line 44, ../sass/components/_event.scss */
+.addRecordItemDiv .recordTime {
+  width: 5em;
+  display: inline-block !important;
+}
+/* line 48, ../sass/components/_event.scss */
+.addRecordItemDiv .recordDateLabel {
+  width: 6.8em;
+}
+/* line 51, ../sass/components/_event.scss */
+.addRecordItemDiv .recordsUseLastItemDiv {
+  width: 35%;
+  margin: 0 auto;
 }

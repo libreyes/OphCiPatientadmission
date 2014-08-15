@@ -23,3 +23,33 @@
 		background-image: image-url("medium.png");
 	}
 }
+
+.addRecordItemDiv {
+	label {
+		width: 10em;
+		margin-top: 5px;
+	}
+	input.recordInput {
+		width: 5em;
+	}
+	.large-2 {
+		display: inline-block !important;
+		margin-left: -2.2em;
+		margin-top: 3px;
+	}
+	.recordTimestamp {
+		width: 6.8em;
+		display: inline-block;
+	}
+	.recordTime {
+		width: 5em;
+		display: inline-block !important;
+	}
+	.recordDateLabel {
+		width: 6.8em;
+	}
+	.recordsUseLastItemDiv {
+		width: 35%;
+		margin: 0 auto;
+	}
+}
