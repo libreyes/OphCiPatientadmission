@@ -58,7 +58,7 @@ $(document).ready(function() {
 		console.log('in costante escalation' + e.target.id);
 	});
 
-	$('#Element_OphCiPatientadmission_Vitals_blood_glucose_na').click(function() {
+	$('#Element_OphCiPatientadmission_Vitals_blood_glucose_na').die('click').live('click',function() {
 		if ($(this).is(':checked')) {
 			$('#Element_OphCiPatientadmission_Vitals_blood_glucose_m').attr('disabled','disabled');
 			$('#Element_OphCiPatientadmission_Vitals_blood_glucose_m').val('');
