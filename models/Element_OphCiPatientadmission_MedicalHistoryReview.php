@@ -90,6 +90,7 @@ class Element_OphCiPatientadmission_MedicalHistoryReview extends BaseEventTypeEl
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			'medications' => array(self::HAS_MANY, 'OphCiPatientadmission_MedicalHistoryReview_Medication', 'element_id'),
 		);
 	}
 
@@ -122,5 +123,61 @@ class Element_OphCiPatientadmission_MedicalHistoryReview extends BaseEventTypeEl
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria,
 		));
+	}
+
+	public function updateMedications($medication_ids=array(),$drug_ids=array(),$route_ids=array(),$option_ids=array(),$frequency_ids=array(),$start_dates=array())
+	{
+		$ids = array();
+
+		foreach ($drug_ids as $i => $drug_id) {
+			if (!$medication_ids[$i] || !$medication = OphCiPatientadmission_MedicalHistoryReview_Medication::model()->findByPk($medication_ids[$i])) {
+				$medication = new OphCiPatientadmission_MedicalHistoryReview_Medication;
+				$medication->element_id = $this->id;
+			}
+
+			$medication->drug_id = $drug_id;
+			$medication->route_id = $route_ids[$i];
+			$medication->option_id = $option_ids[$i];
+			$medication->frequency_id = $frequency_ids[$i];
+			$medication->start_date = $start_dates[$i];
+
+			if (!$medication->save()) {
+				throw new Exception("Unable to save medication: ".print_r($medication->getErrors(),true));
+			}
+
+			$ids[] = $medication->id;
+		}
+
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('element_id = :element_id');
+		$criteria->params[':element_id'] = $this->id;
+
+		!empty($ids) && $criteria->addNotInCondition('id',$ids);
+
+		OphCiPatientadmission_MedicalHistoryReview_Medication::model()->deleteAll($criteria);
+	}
+
+	public function afterSave()
+	{
+		if (Yii::app()->getController()->action->id == 'create') {
+			$patient = $this->event->episode->patient;
+
+			foreach ($this->medications as $medication) {
+				if (!Medication::model()->find('patient_id=? and drug_id=? and route_id=? and option_id=? and frequency_id=? and start_date=?',array($patient->id,$medication->drug_id,$medication->route_id,$medication->option_id,$medication->frequency_id,$medication->start_date))) {
+					$_medication = new Medication;
+					$_medication->patient_id = $patient->id;
+
+					foreach (array('drug_id','route_id','option_id','frequency_id','start_date') as $field) {
+						$_medication->$field = $medication->$field;
+					}
+
+					if (!$_medication->save()) {
+						throw new Exception("Unable to save medication: ".print_r($_medication->getErrors(),true));
+					}
+				}
+			}
+		}
+
+		return parent::afterSave();
 	}
 }

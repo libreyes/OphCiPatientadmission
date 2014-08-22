@@ -18,6 +18,19 @@
  */
 ?>
 	<div class="element-data">
+		<?php $this->widget('application.widgets.MedicationSelection', array(
+			'element' => $element,
+			'relation' => 'medications',
+			'input_name' => 'medication_history',
+			'edit' => false,
+		))?>
+		<?php $this->widget('application.widgets.AllergySelection', array(
+			'form' => $form,
+			'patient' => $this->patient,
+			'label' => 'Allergies',
+			'edit' => false,
+			'allow_collapse' => false,
+		))?>
 		<div class="row data-row">
 			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('history_reviewed'))?></div></div>
 			<div class="large-9 column end"><div class="data-value"><?php echo $element->history_reviewed ? 'Yes' : 'No'?></div></div>

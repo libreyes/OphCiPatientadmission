@@ -18,45 +18,17 @@
  */
 ?>
 	<div class="element-fields">
-		<?php echo $form->radioBoolean($element, 'history_reviewed', array(), array('label' => 3, 'field' => 4))?>
-		<div class="row field-row">
-			<div class="large-3 column">
-				<label>Medication history:</label>
-			</div>
-			<div class="large-9 column end">
-				<table>
-					<tr>
-						<th>Medication</th>
-						<th>Route</th>
-						<th>Option</th>
-						<th>Frequency</th>
-						<th>Start date</th>
-					</tr>
-					<?php if ($medication_history = $this->getMedicationHistory()) {?>
-						<?php foreach ($medication_history as $medication) {?>
-							<tr>
-								<td><?php echo $medication->drug->name?></td>
-								<td><?php echo $medication->route->name?></td>
-								<td><?php echo $medication->option ? $medication->option->name : '-'?></td>
-								<td><?php echo $medication->frequency->name?></td>
-								<td><?php echo $medication->NHSDate('start_date')?></td>
-							</tr>
-						<?php }?>
-					<?php }else{?>
-						<tr>
-							<td colspan="5">
-								No medication history has been recorded for this patient.
-							</td>
-						</tr>
-					<?php }?>
-				</table>
-			</div>
-		</div>
+		<?php $form->widget('application.widgets.MedicationSelection', array(
+			'element' => $element,
+			'relation' => 'medications',
+			'input_name' => 'medication_history',
+		))?>
 		<?php $this->widget('application.widgets.AllergySelection', array(
 			'form' => $form,
 			'patient' => $this->patient,
 			'label' => 'Allergies history',
-			'edit' => false,
+			'edit' => true,
 			'allow_collapse' => false,
 		))?>
+		<?php echo $form->radioBoolean($element, 'history_reviewed', array(), array('label' => 3, 'field' => 4))?>
 	</div>
