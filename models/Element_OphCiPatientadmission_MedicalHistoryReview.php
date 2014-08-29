@@ -160,22 +160,7 @@ class Element_OphCiPatientadmission_MedicalHistoryReview extends BaseEventTypeEl
 	public function afterSave()
 	{
 		if (Yii::app()->getController()->action->id == 'create') {
-			$patient = $this->event->episode->patient;
-
-			foreach ($this->medications as $medication) {
-				if (!Medication::model()->find('patient_id=? and drug_id=? and route_id=? and option_id=? and frequency_id=? and start_date=?',array($patient->id,$medication->drug_id,$medication->route_id,$medication->option_id,$medication->frequency_id,$medication->start_date))) {
-					$_medication = new Medication;
-					$_medication->patient_id = $patient->id;
-
-					foreach (array('drug_id','route_id','option_id','frequency_id','start_date') as $field) {
-						$_medication->$field = $medication->$field;
-					}
-
-					if (!$_medication->save()) {
-						throw new Exception("Unable to save medication: ".print_r($_medication->getErrors(),true));
-					}
-				}
-			}
+			$this->event->episode->patient->addMedications($this->medications);
 		}
 
 		return parent::afterSave();
