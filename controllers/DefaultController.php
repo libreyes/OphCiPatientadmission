@@ -116,4 +116,12 @@ class DefaultController extends BaseEventTypeController
 			$element->updateMedications($data['medication_history_medication_ids'],$data['medication_history_drug_ids'],$data['medication_history_route_ids'],$data['medication_history_option_ids'],$data['medication_history_frequency_ids'],$data['medication_history_start_dates']);
 		}
 	}
+
+	protected function setElementDefaultOptions_Element_OphCiPatientadmission_NPOStatus($element, $action)
+	{
+		if ($action == 'create') {
+			$element->time_last_ate = date('j M Y',strtotime('yesterday'));
+			$element->time_last_drank = date('j M Y',strtotime('yesterday'));
+		}
+	}
 }
