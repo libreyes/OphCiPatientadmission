@@ -18,13 +18,8 @@
  */
 ?>
 	<div class="element-fields">
-		<div class="row field-row">
-			<div class="large-3 column"><label></label></div>
-			<div class="large-4 column end">
-				<?php echo $form->radioButtons($element, 'procedure_verified_id', 'OphCiPatientadmission_Procedure_Verified', null, false, false, false, false, array(), array('label' => 5, 'field' => 5))?>
-				<?php echo $form->radioButtons($element, 'site_verified_id', 'OphCiPatientadmission_Site_Verified', null, false, false, false, false, array(), array('label' => 5, 'field' => 5))?>
-			</div>
-		</div>
+		<?php echo $form->radioButtons($element, 'procedure_verified_id', 'OphCiPatientadmission_Procedure_Verified', null, false, false, false, false, array(), array('label' => 3, 'field' => 5))?>
+		<?php echo $form->radioButtons($element, 'site_verified_id', 'OphCiPatientadmission_Site_Verified', null, false, false, false, false, array(), array('label' => 3, 'field' => 5))?>
 		<div class="row field-row">
 			<div class="large-3 column">
 				<label>Consent:</label>
