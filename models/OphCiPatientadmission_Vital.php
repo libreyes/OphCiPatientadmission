@@ -72,7 +72,7 @@ class OphCiPatientadmission_Vital extends BaseActiveRecordVersioned
 	public function relations()
 	{
 		return array(
-			'element' => array(self::BELONGS_TO, 'Element_OphNuPreoperative_BaselineObservations', 'element_id'),
+			'element' => array(self::BELONGS_TO, 'Element_OphCiPatientadmission_Vitals', 'element_id'),
 			'event' => array(self::BELONGS_TO, 'Event', 'event_id', 'through' => 'element'),
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
