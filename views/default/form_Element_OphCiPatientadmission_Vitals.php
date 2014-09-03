@@ -25,6 +25,10 @@
 			'field' => 'vitals',
 			'validate_method' => '/OphCiPatientadmission/default/validateVital',
 			'row_view' => 'protected/modules/OphCiPatientadmission/views/default/_vital_row.php',
+			'sort_table_after_save' => array(
+				'type' => 'date',
+				'column' => 0,
+			),
 			'columns' => array(
 				array(
 					'width' => 5,
