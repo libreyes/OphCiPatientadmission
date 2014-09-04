@@ -18,6 +18,7 @@
  */
 ?>
 	<div class="element-fields">
+		<?php echo $form->radioBoolean($element, 'history_reviewed', array(), array('label' => 3, 'field' => 4))?>
 		<?php $form->widget('application.widgets.MedicationSelection', array(
 			'element' => $element,
 			'relation' => 'medications',
@@ -30,5 +31,4 @@
 			'edit' => true,
 			'allow_collapse' => false,
 		))?>
-		<?php echo $form->radioBoolean($element, 'history_reviewed', array(), array('label' => 3, 'field' => 4))?>
 	</div>

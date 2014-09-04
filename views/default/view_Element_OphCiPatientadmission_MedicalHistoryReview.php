@@ -18,6 +18,10 @@
  */
 ?>
 	<div class="element-data">
+		<div class="row data-row">
+			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('history_reviewed'))?></div></div>
+			<div class="large-9 column end"><div class="data-value"><?php echo $element->history_reviewed ? 'Yes' : 'No'?></div></div>
+		</div>
 		<?php $this->widget('application.widgets.MedicationSelection', array(
 			'element' => $element,
 			'relation' => 'medications',
@@ -31,8 +35,4 @@
 			'edit' => false,
 			'allow_collapse' => false,
 		))?>
-		<div class="row data-row">
-			<div class="large-3 column"><div class="data-label"><?php echo CHtml::encode($element->getAttributeLabel('history_reviewed'))?></div></div>
-			<div class="large-9 column end"><div class="data-value"><?php echo $element->history_reviewed ? 'Yes' : 'No'?></div></div>
-		</div>
 	</div>
